@@ -14,17 +14,17 @@ public class CargoRepository {
         this.entityManager = entityManager;
     }
     public Optional<Cargo> findById(Integer id) {
-        Cargo author = entityManager.find(Cargo.class, id);
-        return author != null ? Optional.of(author) : Optional.empty();
+        Cargo cargo = entityManager.find(Cargo.class, id);
+        return cargo != null ? Optional.of(cargo) : Optional.empty();
     }
     public List<Cargo> findAll() {
         return entityManager.createQuery("from Cargo").getResultList();
     }
     public Optional<Cargo> findByName(String name) {
-        Cargo author = entityManager.createNamedQuery("Cargo.findByName", Cargo.class)
+        Cargo cargo = entityManager.createNamedQuery("Cargo.findByName", Cargo.class)
                 .setParameter("name", name)
                 .getSingleResult();
-        return author != null ? Optional.of(author) : Optional.empty();
+        return cargo != null ? Optional.of(cargo) : Optional.empty();
     }
     public Optional<Cargo> save(Cargo cargo) {
         try {

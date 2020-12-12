@@ -1,5 +1,8 @@
 import models.Cargo;
+import models.Imagem;
+import models.Usuario;
 import repository.CargoRepository;
+import repository.ImagemRepository;
 import repository.UsuarioRepository;
 
 import javax.persistence.EntityManager;
@@ -14,8 +17,10 @@ public class main {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GerenciadorDeImagens");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
+
         CargoRepository cargoRepository = new CargoRepository(entityManager);
         UsuarioRepository usuarioRepository = new UsuarioRepository(entityManager);
+        ImagemRepository imagemRepository = new ImagemRepository(entityManager);
 
         Cargo admin = new Cargo("Administrador", "admin");
         Cargo userNormal = new Cargo("Usuário Normal", "user");
@@ -28,7 +33,6 @@ public class main {
 
         List<Cargo> cargoList = cargoRepository.findAll();
         cargoList.forEach(System.out::println);
-
         entityManager.close();
         entityManagerFactory.close();
     }
