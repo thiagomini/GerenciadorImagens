@@ -33,4 +33,23 @@ public class Usuario {
                 ", cargo=" + cargo +
                 '}';
     }
+
+    public Usuario() {
+    }
+
+    public Usuario(long id, String name, String email, String password, Cargo cargo) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.cargo = cargo;
+    }
+
+    public Usuario(String name, String email, String password, Cargo cargo) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.cargo = cargo;
+    }
 }
+

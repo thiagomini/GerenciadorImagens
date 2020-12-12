@@ -4,10 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "imagens")
+@NamedQuery(name = "Imagem.findByCaminho",
+        query = "SELECT i FROM Imagem i WHERE i.caminho = :caminho")
 public class Imagem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
 
     @Column
@@ -36,7 +38,6 @@ public class Imagem {
         this.id = id;
     }
 
-    @Id
     public long getId() {
         return id;
     }
@@ -59,5 +60,14 @@ public class Imagem {
 
     public Imagem() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Imagem{" +
+                "id=" + id +
+                ", caminho='" + caminho + '\'' +
+                ", excluida=" + excluida +
+                '}';
     }
 }

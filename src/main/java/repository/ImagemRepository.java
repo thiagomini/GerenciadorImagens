@@ -13,6 +13,11 @@ public class ImagemRepository {
         this.entityManager = entityManager;
     }
 
+    /**
+     * Encontra uma imagem no banco de dados pelo Id
+     * @param id Id da imagem
+     * @return Imagem encontrada
+     */
     public Optional<Imagem> findById(long id) {
         Imagem imagem = entityManager.find(Imagem.class, id);
         return imagem != null ? Optional.of(imagem) : Optional.empty();
@@ -20,9 +25,10 @@ public class ImagemRepository {
     public List<Imagem> findAll() {
         return entityManager.createQuery("from Imagem").getResultList();
     }
-    public Optional<Imagem> findByName(String name) {
-        Imagem imagem = entityManager.createNamedQuery("Imagem.findByName", Imagem.class)
-                .setParameter("name", name)
+
+    public Optional<Imagem> findByCaminho(String caminho) {
+        Imagem imagem = entityManager.createNamedQuery("Imagem.findByCaminho", Imagem.class)
+                .setParameter("caminho", caminho)
                 .getSingleResult();
         return imagem != null ? Optional.of(imagem) : Optional.empty();
     }
@@ -39,19 +45,18 @@ public class ImagemRepository {
     }
 
     public void delete(Imagem imagem) {
-        try {
-            entityManager.getTransaction().begin();
-            imagem = entityManager.find(Imagem.class, imagem.getId());
-            entityManager.remove(imagem);
-            entityManager.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            entityManager.getTransaction().rollback();
-        }
+       imagem.setExcluida(true);
+       this.save(imagem);
     }
 
     public void deleteById(long id) {
             Optional<Imagem> imagem = findById(id);
             imagem.ifPresent(this::delete);
+    }
+
+    public void deleteAll() {
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Imagem").executeUpdate();
+        entityManager.getTransaction().commit();
     }
 }
