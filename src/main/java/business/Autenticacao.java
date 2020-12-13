@@ -3,6 +3,7 @@ package business;
 import models.Usuario;
 import repository.UsuarioRepository;
 
+import javax.persistence.NoResultException;
 import java.util.Optional;
 
 public class Autenticacao {
@@ -13,14 +14,23 @@ public class Autenticacao {
         this.usuarioRepository = UsuarioRepository.getInstance();
     }
 
-    public Usuario autenticar(String email, String password) {
-        Optional<Usuario> usuarioOptional = this.usuarioRepository.findByEmail(email);
+    public Usuario autenticar(String email, String password) throws RuntimeException {
+        RuntimeException exception = new RuntimeException("E-mail ou senha estão incorretos.");
+        Optional<Usuario> usuarioOptional;
+
+        try {
+            usuarioOptional = this.usuarioRepository.findByEmail(email);
+        } catch (NoResultException ex) {
+            throw exception;
+        }
+
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
             if (usuario.getPassword().equals(password)) {
                 return usuario;
             }
         }
-        throw new Error("E-mail ou senha estão incorretos.");
+
+        throw exception;
     }
 }
