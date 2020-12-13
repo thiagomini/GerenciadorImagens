@@ -9,11 +9,22 @@ import java.util.List;
 import java.util.Optional;
 
 public class CargoRepository {
+
+    private static CargoRepository uniqueInstance;
     
     private EntityManager entityManager;
 
-    public CargoRepository(EntityManager entityManager) {
+    private CargoRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public static synchronized CargoRepository getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new CargoRepository(
+                    EntityManagerProvider.getEntityManager()
+            );
+        }
+        return uniqueInstance;
     }
     public Optional<Cargo> findById(long id) {
         Cargo cargo = entityManager.find(Cargo.class, id);
@@ -61,5 +72,9 @@ public class CargoRepository {
         entityManager.getTransaction().begin();
         entityManager.createQuery("DELETE FROM Cargo").executeUpdate();
         entityManager.getTransaction().commit();
+    }
+
+    public void clearEntityManager() {
+        this.entityManager.clear();
     }
 }

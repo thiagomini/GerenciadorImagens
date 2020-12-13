@@ -9,10 +9,21 @@ import java.util.Optional;
 
 public class UsuarioRepository {
 
+    private static UsuarioRepository uniqueInstance;
+
     private EntityManager entityManager;
 
-    public UsuarioRepository(EntityManager entityManager) {
+    private UsuarioRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public static synchronized UsuarioRepository getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new UsuarioRepository(
+                    EntityManagerProvider.getEntityManager()
+            );
+        }
+        return uniqueInstance;
     }
 
     public Optional<Usuario> findById(long id) {
@@ -64,5 +75,23 @@ public class UsuarioRepository {
         entityManager.getTransaction().begin();
         entityManager.createQuery("DELETE FROM Usuario").executeUpdate();
         entityManager.getTransaction().commit();
+    }
+
+    /**
+     * Indica se existe algum usuário cadastrado no banco
+     * @return Verdadeiro se existe um usuário registrado no banco, falso caso contrário
+     */
+    public boolean hasOneRegistered() {
+        return count() > 0;
+    }
+
+    public long count() {
+        return (long) entityManager.createQuery("SELECT count (u.id) FROM Usuario u")
+                .getSingleResult();
+
+    }
+
+    public void clearEntityManager() {
+        this.entityManager.clear();
     }
 }

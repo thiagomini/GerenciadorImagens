@@ -18,9 +18,9 @@ public class main {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 
-        CargoRepository cargoRepository = new CargoRepository(entityManager);
-        UsuarioRepository usuarioRepository = new UsuarioRepository(entityManager);
-        ImagemRepository imagemRepository = new ImagemRepository(entityManager);
+        CargoRepository cargoRepository = CargoRepository.getInstance();
+        UsuarioRepository usuarioRepository = UsuarioRepository.getInstance();
+        ImagemRepository imagemRepository = ImagemRepository.getInstance();
 
         Cargo admin = new Cargo("Administrador", "admin");
         Cargo userNormal = new Cargo("Usuário Normal", "user");
