@@ -3,7 +3,6 @@ package business;
 import models.Usuario;
 import repository.UsuarioRepository;
 
-import javax.persistence.NoResultException;
 import java.util.Optional;
 
 public class Autenticacao {
