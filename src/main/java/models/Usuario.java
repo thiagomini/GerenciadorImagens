@@ -1,6 +1,11 @@
 package models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table( name = "usuarios" )
@@ -22,6 +27,10 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name="idCargo")
     private Cargo cargo;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Notificacao> notificacoes = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -50,6 +59,10 @@ public class Usuario {
         this.email = email;
         this.password = password;
         this.cargo = cargo;
+    }
+
+    public List<Notificacao> getNotificacoes() {
+        return notificacoes;
     }
 }
 

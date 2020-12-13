@@ -1,6 +1,12 @@
 package models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "imagens")
@@ -17,6 +23,10 @@ public class Imagem {
 
     @Column
     private boolean excluida;
+
+    @OneToMany(mappedBy = "imagem", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Notificacao> notificacoes = new ArrayList<>();
 
     public String getCaminho() {
         return caminho;
