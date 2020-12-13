@@ -13,10 +13,12 @@ class UsuarioFactoryTest {
 
     UsuarioRepository repository;
     CargoRepository cargoRepository;
+    UsuarioFactory usuarioFactory;
     @BeforeAll
     void setUp() {
         this.repository = UsuarioRepository.getInstance(true);
         this.cargoRepository = CargoRepository.getInstance(true);
+        this.usuarioFactory = new UsuarioFactory(true);
     }
 
     @AfterEach
@@ -31,7 +33,7 @@ class UsuarioFactoryTest {
      */
     @Test
     void CT037() {
-        Usuario usuarioNovo = UsuarioFactory.createUsuario("Thiago", "email@mail.com", "1234");
+        Usuario usuarioNovo = usuarioFactory.createUsuario("Thiago", "email@mail.com", "1234");
         assertEquals("admin", usuarioNovo.getCargo().getCode());
         assertTrue(usuarioNovo.getCargo().getId() > 0);
     }
@@ -45,7 +47,7 @@ class UsuarioFactoryTest {
         Cargo cargo = new Cargo("Administrador Criado Antes", "admin");
         this.cargoRepository.save(cargo);
 
-        Usuario usuarioNovo = UsuarioFactory.createUsuario("Thiago", "email@mail.com", "1234");
+        Usuario usuarioNovo = usuarioFactory.createUsuario("Thiago", "email@mail.com", "1234");
         assertEquals("admin", usuarioNovo.getCargo().getCode());
         assertEquals("Administrador Criado Antes", usuarioNovo.getCargo().getNome());
     }
@@ -59,7 +61,7 @@ class UsuarioFactoryTest {
         Usuario usuarioAntigo = new Usuario("Antigo Usuario", "email", "senha");
         this.repository.save(usuarioAntigo);
 
-        Usuario usuarioNovo = UsuarioFactory.createUsuario("Thiago", "email@mail.com", "1234");
+        Usuario usuarioNovo = usuarioFactory.createUsuario("Thiago", "email@mail.com", "1234");
         assertEquals("common_user", usuarioNovo.getCargo().getCode());
         assertTrue(usuarioNovo.getCargo().getId() > 0);
     }
@@ -75,7 +77,7 @@ class UsuarioFactoryTest {
 
         this.cargoRepository.save(new Cargo("Usuario Comum", "common_user"));
 
-        Usuario usuarioNovo = UsuarioFactory.createUsuario("Thiago", "email@mail.com", "1234");
+        Usuario usuarioNovo = usuarioFactory.createUsuario("Thiago", "email@mail.com", "1234");
         assertEquals("common_user", usuarioNovo.getCargo().getCode());
         assertTrue(usuarioNovo.getCargo().getId() > 0);
     }

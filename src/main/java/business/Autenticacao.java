@@ -9,8 +9,8 @@ public class Autenticacao {
 
     private UsuarioRepository usuarioRepository;
 
-    public Autenticacao() {
-        this.usuarioRepository = UsuarioRepository.getInstance();
+    public Autenticacao(boolean testDatabase) {
+        this.usuarioRepository = UsuarioRepository.getInstance(testDatabase);
     }
 
     public Usuario autenticar(String email, String password) throws RuntimeException {

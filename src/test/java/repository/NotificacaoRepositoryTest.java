@@ -22,7 +22,7 @@ public class NotificacaoRepositoryTest {
 
     @BeforeAll
     void setUp() {
-        this.repository = NotificacaoRepository.getInstance();
+        this.repository = NotificacaoRepository.getInstance(true);
     }
 
     @AfterEach

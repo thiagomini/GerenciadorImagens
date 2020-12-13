@@ -9,21 +9,22 @@ import java.util.Optional;
 
 public class UsuarioFactory {
 
-    private static UsuarioRepository usuarioRepository = UsuarioRepository.getInstance(true);
-    private static CargoRepository cargoRepository = CargoRepository.getInstance(true);
+    UsuarioRepository usuarioRepository;
+    CargoRepository cargoRepository;
 
-    private UsuarioFactory() {
-
+    public UsuarioFactory(boolean testDatabase) {
+        usuarioRepository = UsuarioRepository.getInstance(testDatabase);
+        cargoRepository = CargoRepository.getInstance(testDatabase);
     }
 
-    public static Usuario createUsuario(String nome, String email, String senha) {
+    public Usuario createUsuario(String nome, String email, String senha) {
         Cargo cargo = getCargo();
         Usuario usuario = new Usuario(nome, email, senha, cargo);
         usuarioRepository.save(usuario);
         return usuario;
     }
 
-    private static Cargo getCargo() {
+    private Cargo getCargo() {
         if (usuarioRepository.hasOneRegistered()) {
             Optional<Cargo> cargoOptional = cargoRepository.findByCode("common_user");
             return cargoOptional.orElse(new Cargo("Usuario Comum", "common_user"));

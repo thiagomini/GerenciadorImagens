@@ -16,10 +16,12 @@ public class NotificacaoRepository {
         this.entityManager = entityManager;
     }
 
-    public static synchronized NotificacaoRepository getInstance() {
+    public static synchronized NotificacaoRepository getInstance(boolean testDatabase) {
         if (uniqueInstance == null) {
             uniqueInstance = new NotificacaoRepository(
-                    EntityManagerProvider.getEntityManager()
+                    testDatabase
+                            ? EntityManagerProvider.getTestEntityManager()
+                            : EntityManagerProvider.getEntityManager()
             );
         }
         return uniqueInstance;

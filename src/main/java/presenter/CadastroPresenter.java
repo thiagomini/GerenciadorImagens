@@ -9,9 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CadastroPresenter extends AbstractPresenter{
+
+    UsuarioFactory usuarioFactory;
+
     @Override
     protected JFrame iniciarTela() {
         this.tela = new CadastroView();
+        this.usuarioFactory = new UsuarioFactory(false);
         this.tela.setVisible(true);
         return this.tela;
     }
@@ -36,7 +40,7 @@ public class CadastroPresenter extends AbstractPresenter{
         String nome = telaConvertida.getTxtNome().getText();
         String email = telaConvertida.getTxtEmail().getText();
         String senha = String.valueOf(telaConvertida.getTxtSenha().getPassword());
-        Usuario usuarioCriado = UsuarioFactory.createUsuario(nome, email, senha);
+        Usuario usuarioCriado = usuarioFactory.createUsuario(nome, email, senha);
         JOptionPane.showMessageDialog(this.tela, "Novo usuário de Email " + email + " cadastrado com sucesso!");
     }
 

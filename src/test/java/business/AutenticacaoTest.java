@@ -21,8 +21,8 @@ public class AutenticacaoTest {
 
     @BeforeAll
     void setUp() {
-        this.autenticacao = new Autenticacao();
-        this.usuarioRepository = UsuarioRepository.getInstance();
+        this.autenticacao = new Autenticacao(true);
+        this.usuarioRepository = UsuarioRepository.getInstance(true);
     }
 
     @AfterEach
