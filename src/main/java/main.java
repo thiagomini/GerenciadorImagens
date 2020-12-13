@@ -1,7 +1,7 @@
-import business.TelaInicialBuilder;
+import presenter.JanelaPrincipalPresenter;
 
 public class main {
     public static void main(String[] args) {
-        TelaInicialBuilder.getTelaInicial();
+        new JanelaPrincipalPresenter(true);
     }
 }

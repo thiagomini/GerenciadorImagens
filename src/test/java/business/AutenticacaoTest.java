@@ -38,7 +38,7 @@ public class AutenticacaoTest {
      * Deve autentincar um usuário já cadastrado corretamente
      */
     @Test
-    void CT033() {
+    void CT033() throws IllegalAccessException {
         Cargo cargo = new Cargo("Usuario", "user");
         Usuario usuario = new Usuario("Fulano", "fulano@mail.com" , "1234", cargo);
         Optional<Usuario> usuarioOptional = this.usuarioRepository.save(usuario);
@@ -55,7 +55,7 @@ public class AutenticacaoTest {
      */
     @Test
     void CT035() {
-        RuntimeException exception = assertThrows(RuntimeException.class,
+        IllegalAccessException exception = assertThrows(IllegalAccessException.class,
                 () -> this.autenticacao.autenticar("Usuario Inexistente", "123456"));
         assertEquals("E-mail ou senha estão incorretos.", exception.getMessage());
     }
@@ -71,7 +71,7 @@ public class AutenticacaoTest {
         Usuario usuario = new Usuario("Fulano", "fulano@mail.com" , "1234", cargo);
         Optional<Usuario> usuarioOptional = this.usuarioRepository.save(usuario);
 
-        RuntimeException exception = assertThrows(RuntimeException.class,
+        IllegalAccessException exception = assertThrows(IllegalAccessException.class,
                 () -> this.autenticacao.autenticar(usuario.getEmail(), "abc"));
         assertEquals("E-mail ou senha estão incorretos.", exception.getMessage());
     }

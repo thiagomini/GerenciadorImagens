@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="gerenciador-imagens" uuid="079f3414-216c-42a5-800b-46b48aa294e1">
+    <data-source source="LOCAL" name="gerenciador-imagens" uuid="a4b96b46-f6b7-4830-9287-2f74e2554bdd">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>
-      <jdbc-url>jdbc:h2:file:C:\Users\Miqueas\Desktop\GerenciadorImagens\GerenciadorImagens\data\gerenciador-imagens</jdbc-url>
+      <jdbc-url>jdbc:h2:file:C:\Users\Thiago\Documents\Faculdade\Gestão de Qualidade\Exercícios\GerencimantoImagens\data\gerenciador-imagens</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

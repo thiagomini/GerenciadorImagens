@@ -13,7 +13,7 @@ public class Autenticacao {
         this.usuarioRepository = UsuarioRepository.getInstance(testDatabase);
     }
 
-    public Usuario autenticar(String email, String password) throws RuntimeException {
+    public Usuario autenticar(String email, String password) throws RuntimeException, IllegalAccessException {
         Optional<Usuario> usuarioOptional = this.usuarioRepository.findByEmail(email);
 
         if (usuarioOptional.isPresent()) {
@@ -22,6 +22,6 @@ public class Autenticacao {
                 return usuario;
             }
         }
-        throw new RuntimeException("E-mail ou senha estão incorretos.");
+        throw new IllegalAccessException("E-mail ou senha estão incorretos.");
     }
 }

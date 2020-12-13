@@ -1,16 +1,25 @@
 package presenter;
 
 import javax.swing.*;
+import java.util.Observable;
 
-public abstract class AbstractPresenter {
+public abstract class AbstractPresenter extends Observable {
     protected JFrame tela;
 
-    protected abstract JFrame iniciarTela();
+    protected abstract void iniciarTela(boolean visible);
 
     protected abstract void adicionarListeners();
 
-    protected AbstractPresenter() {
-        this.tela = iniciarTela();
+    protected AbstractPresenter(boolean visible) {
+        iniciarTela(visible);
         adicionarListeners();
+    }
+
+    public JFrame getTela() {
+        return tela;
+    }
+
+    public void closeView() {
+        this.tela.dispose();
     }
 }

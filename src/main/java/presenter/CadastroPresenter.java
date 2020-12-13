@@ -12,12 +12,15 @@ public class CadastroPresenter extends AbstractPresenter{
 
     UsuarioFactory usuarioFactory;
 
+    public CadastroPresenter(boolean visible) {
+        super(visible);
+    }
+
     @Override
-    protected JFrame iniciarTela() {
+    protected void iniciarTela(boolean visible) {
         this.tela = new CadastroView();
         this.usuarioFactory = new UsuarioFactory(false);
-        this.tela.setVisible(true);
-        return this.tela;
+        this.tela.setVisible(visible);
     }
 
     @Override
@@ -40,8 +43,10 @@ public class CadastroPresenter extends AbstractPresenter{
         String nome = telaConvertida.getTxtNome().getText();
         String email = telaConvertida.getTxtEmail().getText();
         String senha = String.valueOf(telaConvertida.getTxtSenha().getPassword());
-        Usuario usuarioCriado = usuarioFactory.createUsuario(nome, email, senha);
-        JOptionPane.showMessageDialog(this.tela, "Novo usuário de Email " + email + " cadastrado com sucesso!");
+        usuarioFactory.createUsuario(nome, email, senha);
+        JOptionPane.showMessageDialog(this.tela, "Novo usuario de Email " + email + " cadastrado com sucesso!", "Cadastro", JOptionPane.INFORMATION_MESSAGE);
+        this.setChanged();
+        this.notifyObservers();
         this.tela.dispose();
     }
 
