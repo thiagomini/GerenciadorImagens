@@ -2,12 +2,11 @@ package business;
 
 import models.Cargo;
 import models.Usuario;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import presenter.CadastroPresenter;
 import presenter.LoginPresenter;
+import repository.CargoRepository;
+import repository.EntityManagerProvider;
 import repository.UsuarioRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,16 +15,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class TelaInicialBuilderTest {
 
     UsuarioRepository repository;
+    CargoRepository cargoRepository;
 
     @BeforeAll
     void setUp() {
         this.repository = UsuarioRepository.getInstance(true);
+        this.cargoRepository = CargoRepository.getInstance(true);
     }
 
     @AfterEach
     void tearDown() {
         this.repository.deleteAll();
         this.repository.clearEntityManager();
+        this.cargoRepository.deleteAll();
     }
 
     /**

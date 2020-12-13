@@ -15,5 +15,12 @@ public class EntityManagerProvider {
         return testEntityManagerFactory.createEntityManager();
     }
 
+    public static void closeFactory() {
+        entityManagerFactory.close();
+    }
+
+    public static void closeTestFactory() {
+        testEntityManagerFactory.close();
+    }
     private EntityManagerProvider(){}
 }

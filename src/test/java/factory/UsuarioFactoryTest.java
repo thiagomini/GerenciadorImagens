@@ -4,6 +4,7 @@ import models.Cargo;
 import models.Usuario;
 import org.junit.jupiter.api.*;
 import repository.CargoRepository;
+import repository.EntityManagerProvider;
 import repository.UsuarioRepository;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -42,6 +42,7 @@ public class CadastroPresenter extends AbstractPresenter{
         String senha = String.valueOf(telaConvertida.getTxtSenha().getPassword());
         Usuario usuarioCriado = usuarioFactory.createUsuario(nome, email, senha);
         JOptionPane.showMessageDialog(this.tela, "Novo usuário de Email " + email + " cadastrado com sucesso!");
+        this.tela.dispose();
     }
 
     private CadastroView getConvertedView() {

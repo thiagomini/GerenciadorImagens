@@ -2,10 +2,9 @@ package business;
 
 import models.Cargo;
 import models.Usuario;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
+import repository.CargoRepository;
+import repository.EntityManagerProvider;
 import repository.UsuarioRepository;
 
 import java.util.Optional;
@@ -18,17 +17,20 @@ public class AutenticacaoTest {
 
     Autenticacao autenticacao;
     UsuarioRepository usuarioRepository;
+    CargoRepository cargoRepository;
 
     @BeforeAll
     void setUp() {
         this.autenticacao = new Autenticacao(true);
         this.usuarioRepository = UsuarioRepository.getInstance(true);
+        this.cargoRepository = CargoRepository.getInstance(true);
     }
 
     @AfterEach
     void tearDown() {
         this.usuarioRepository.deleteAll();
         this.usuarioRepository.clearEntityManager();
+        this.cargoRepository.deleteAll();
     }
 
     /**

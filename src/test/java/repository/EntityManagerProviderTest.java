@@ -1,5 +1,6 @@
 package repository;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;

@@ -4,10 +4,7 @@ import models.Cargo;
 import models.Imagem;
 import models.PermissaoImagem;
 import models.Usuario;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Optional;

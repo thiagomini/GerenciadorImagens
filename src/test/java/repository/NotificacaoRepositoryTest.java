@@ -19,17 +19,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class NotificacaoRepositoryTest {
 
     NotificacaoRepository repository;
+    CargoRepository cargoRepository;
 
     @BeforeAll
     void setUp() {
         this.repository = NotificacaoRepository.getInstance(true);
+        this.cargoRepository = CargoRepository.getInstance(true);
     }
 
     @AfterEach
     void tearDown() {
         this.repository.deleteAll();
         this.repository.clearEntityManager();
+        this.cargoRepository.deleteAll();
     }
+
 
 
     /**
