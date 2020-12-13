@@ -1,6 +1,8 @@
 package repository;
 
 import models.Cargo;
+import models.Imagem;
+import models.PermissaoImagem;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -13,7 +15,7 @@ public class CargoRepository {
     public CargoRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-    public Optional<Cargo> findById(Integer id) {
+    public Optional<Cargo> findById(long id) {
         Cargo cargo = entityManager.find(Cargo.class, id);
         return cargo != null ? Optional.of(cargo) : Optional.empty();
     }
@@ -36,5 +38,28 @@ public class CargoRepository {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    public void delete(Cargo cargo) {
+        try {
+            entityManager.getTransaction().begin();
+            cargo = entityManager.find(Cargo.class, cargo.getId());
+            entityManager.remove(cargo);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+    }
+
+    public void deleteById(long id) {
+        Optional<Cargo> cargo = findById(id);
+        cargo.ifPresent(this::delete);
+    }
+
+    public void deleteAll() {
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Cargo").executeUpdate();
+        entityManager.getTransaction().commit();
     }
 }
