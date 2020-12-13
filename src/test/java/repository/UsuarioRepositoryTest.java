@@ -140,9 +140,18 @@ class UsuarioRepositoryTest {
         assertTrue(this.repository.hasOneRegistered());
     }
 
+    /**
+     * Função <b>findByEmail()</b>
+     * Deve retornar corretamente um usuário pelo e-mail
+     */
+    @Test
+    void CT040() {
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Fulano", "fulano@mail.com" , "1234", cargo);
+        this.repository.save(usuario);
 
-
-
-
+        Optional<Usuario> usuarioEncontrado = this.repository.findByEmail(usuario.getEmail());
+        assertTrue(usuarioEncontrado.isPresent());
+    }
 
 }
