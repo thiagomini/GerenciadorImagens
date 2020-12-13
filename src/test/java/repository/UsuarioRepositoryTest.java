@@ -154,4 +154,18 @@ class UsuarioRepositoryTest {
         assertTrue(usuarioEncontrado.isPresent());
     }
 
+    /**
+     * Função <b>findByName()</b>
+     * Deve retornar corretamente um usuário pelo nome
+     */
+    @Test
+    void CT042() {
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Fulano", "fulano@mail.com" , "1234", cargo);
+        this.repository.save(usuario);
+
+        Optional<Usuario> usuarioEncontrado = this.repository.findByName(usuario.getName());
+        assertTrue(usuarioEncontrado.isPresent());
+    }
+
 }
