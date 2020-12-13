@@ -112,8 +112,8 @@ class ImagemRepositoryTest {
     }
 
     /**
-     * Função <b>deleteById()</b>
-     * Deve setar o campo "deletada" para true de uma imagem
+     * Função <b>findAll()</b>
+     * Deve retornar uma lista com todas as imagens do banco
      */
     @Test
     void CT05() {
@@ -131,7 +131,7 @@ class ImagemRepositoryTest {
     }
 
     /**
-     * Função <b>findByCaminho</b>
+     * Função <b>findByCaminho(caminho)</b>
      * Deve encontrar uma imagem pelo caminho
      */
     @Test
