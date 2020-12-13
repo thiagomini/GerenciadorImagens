@@ -80,8 +80,8 @@ public class PermissaoImagem {
         return visualizacao;
     }
 
-    public void setVisualizacao(boolean escrita) {
-        this.visualizacao = escrita;
+    public void setVisualizacao(boolean visualizacao) {
+        this.visualizacao = visualizacao;
     }
 
     public boolean isExclusao() {
