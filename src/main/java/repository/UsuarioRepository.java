@@ -42,6 +42,13 @@ public class UsuarioRepository {
         return usuario != null ? Optional.of(usuario) : Optional.empty();
     }
 
+    public Optional<Usuario> findByEmail(String email) {
+        Usuario usuario = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
+                .setParameter("email", email)
+                .getSingleResult();
+        return usuario != null ? Optional.of(usuario) : Optional.empty();
+    }
+
     public Optional<Usuario> save(Usuario usuario) {
         try {
             entityManager.getTransaction().begin();
