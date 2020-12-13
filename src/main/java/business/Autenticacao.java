@@ -15,14 +15,7 @@ public class Autenticacao {
     }
 
     public Usuario autenticar(String email, String password) throws RuntimeException {
-        RuntimeException exception = new RuntimeException("E-mail ou senha estão incorretos.");
-        Optional<Usuario> usuarioOptional;
-
-        try {
-            usuarioOptional = this.usuarioRepository.findByEmail(email);
-        } catch (NoResultException ex) {
-            throw exception;
-        }
+        Optional<Usuario> usuarioOptional = this.usuarioRepository.findByEmail(email);
 
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
@@ -30,7 +23,6 @@ public class Autenticacao {
                 return usuario;
             }
         }
-
-        throw exception;
+        throw new RuntimeException("E-mail ou senha estão incorretos.");
     }
 }
