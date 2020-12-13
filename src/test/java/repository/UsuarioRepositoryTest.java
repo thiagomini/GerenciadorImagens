@@ -7,9 +7,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -19,20 +16,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UsuarioRepositoryTest {
 
-    EntityManager entityManager;
     UsuarioRepository repository;
 
     @BeforeAll
     void setUp() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GerenciadorDeImagensInMemory");
-        this.entityManager = entityManagerFactory.createEntityManager();
-        this.repository = new UsuarioRepository(entityManager);
+        this.repository = UsuarioRepository.getInstance();
     }
 
     @AfterEach
     void tearDown() {
         this.repository.deleteAll();
-        this.entityManager.clear();
+        this.repository.clearEntityManager();
     }
 
 
@@ -117,6 +111,35 @@ class UsuarioRepositoryTest {
 
         assertTrue(usuarioEncontrado.isEmpty());
     }
+
+    /**
+     * Função <b>count()</b>
+     * Deve retornar corretamente o número de usuários cadastrados
+     */
+    @Test
+    void CT027() {
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Thiago", "thiago@mail.com" , "1234", cargo);
+        Usuario usuario2 = new Usuario("Thiago2", "thiago@mail.com" , "1234", cargo);
+        Usuario usuario3 = new Usuario("Thiago3", "thiago@mail.com" , "1234", cargo);
+        this.repository.save(usuario);
+        this.repository.save(usuario2);
+        this.repository.save(usuario3);
+        assertEquals(3, this.repository.count());
+    }
+
+    /**
+     * Função <b>hasOneRegistered()</b>
+     * Deve retornar se existe algum usuário cadastrado no banco de dados
+     */
+    @Test
+    void CT028() {
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Thiago", "thiago@mail.com" , "1234", cargo);
+        this.repository.save(usuario);
+        assertTrue(this.repository.hasOneRegistered());
+    }
+
 
 
 

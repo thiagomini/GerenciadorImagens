@@ -1,9 +1,5 @@
 package repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import models.Imagem;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,25 +9,23 @@ import org.junit.jupiter.api.TestInstance;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ImagemRepositoryTest {
 
-    EntityManager entityManager;
     ImagemRepository repository;
 
     @BeforeAll
     void setUp() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GerenciadorDeImagensInMemory");
-        this.entityManager = entityManagerFactory.createEntityManager();
-        this.repository = new ImagemRepository(entityManager);
+        this.repository = ImagemRepository.getInstance();
     }
 
     @AfterEach
     void tearDown() {
         this.repository.deleteAll();
-        this.entityManager.clear();
+        this.repository.clearEntityManager();
     }
 
     /**

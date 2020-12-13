@@ -8,10 +8,21 @@ import java.util.Optional;
 
 public class PermissoesImagemRepository {
 
+    private static PermissoesImagemRepository uniqueInstance;
+
     private EntityManager entityManager;
 
-    public PermissoesImagemRepository(EntityManager entityManager) {
+    private PermissoesImagemRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public static synchronized PermissoesImagemRepository getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new PermissoesImagemRepository(
+                    EntityManagerProvider.getEntityManager()
+            );
+        }
+        return uniqueInstance;
     }
 
     /**
@@ -61,5 +72,9 @@ public class PermissoesImagemRepository {
         entityManager.getTransaction().begin();
         entityManager.createQuery("DELETE FROM PermissaoImagem").executeUpdate();
         entityManager.getTransaction().commit();
+    }
+
+    public void clearEntityManager() {
+        this.entityManager.clear();
     }
 }

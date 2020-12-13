@@ -17,20 +17,17 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CargoRepositoryTest {
 
-    EntityManager entityManager;
     CargoRepository repository;
 
     @BeforeAll
     void setUp() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GerenciadorDeImagensInMemory");
-        this.entityManager = entityManagerFactory.createEntityManager();
-        this.repository = new CargoRepository(entityManager);
+        this.repository = CargoRepository.getInstance();
     }
 
     @AfterEach
     void tearDown() {
         this.repository.deleteAll();
-        this.entityManager.clear();
+        this.repository.clearEntityManager();
     }
 
 

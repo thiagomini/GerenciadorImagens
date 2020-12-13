@@ -9,8 +9,20 @@ import java.util.Optional;
 public class ImagemRepository {
     private EntityManager entityManager;
 
-    public ImagemRepository(EntityManager entityManager) {
+    private static ImagemRepository uniqueInstance;
+
+    private ImagemRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public static synchronized ImagemRepository getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new ImagemRepository(
+                    EntityManagerProvider.getEntityManager()
+            );
+        }
+
+        return uniqueInstance;
     }
 
     /**
@@ -58,5 +70,9 @@ public class ImagemRepository {
         entityManager.getTransaction().begin();
         entityManager.createQuery("DELETE FROM Imagem").executeUpdate();
         entityManager.getTransaction().commit();
+    }
+
+    public void clearEntityManager() {
+        this.entityManager.clear();
     }
 }
