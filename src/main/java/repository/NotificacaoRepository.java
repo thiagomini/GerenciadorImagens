@@ -7,10 +7,22 @@ import java.util.List;
 import java.util.Optional;
 
 public class NotificacaoRepository {
+
+    private static NotificacaoRepository uniqueInstance;
+
     private EntityManager entityManager;
 
-    public NotificacaoRepository(EntityManager entityManager) {
+    private NotificacaoRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public static synchronized NotificacaoRepository getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new NotificacaoRepository(
+                    EntityManagerProvider.getEntityManager()
+            );
+        }
+        return uniqueInstance;
     }
 
     public Optional<Notificacao> findById(long id) {
@@ -55,5 +67,9 @@ public class NotificacaoRepository {
         entityManager.getTransaction().begin();
         entityManager.createQuery("DELETE FROM Notificacao").executeUpdate();
         entityManager.getTransaction().commit();
+    }
+
+    public void clearEntityManager() {
+        this.entityManager.clear();
     }
 }
