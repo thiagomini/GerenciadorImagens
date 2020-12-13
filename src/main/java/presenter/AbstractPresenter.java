@@ -3,7 +3,7 @@ package presenter;
 import javax.swing.*;
 
 public abstract class AbstractPresenter {
-    private JFrame tela;
+    protected JFrame tela;
 
     protected abstract JFrame iniciarTela();
 

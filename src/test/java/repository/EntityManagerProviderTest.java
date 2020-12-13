@@ -14,7 +14,8 @@ class EntityManagerProviderTest {
      */
     @Test
     void CT029() {
-        assertNotNull(EntityManagerProvider.getEntityManager());
+        EntityManager entityManager = EntityManagerProvider.getEntityManager();
+        assertEquals("GerenciadorDeImagens", entityManager.getEntityManagerFactory().getProperties().get("hibernate.ejb.persistenceUnitName"));;
     }
 
     /**
@@ -28,5 +29,15 @@ class EntityManagerProviderTest {
 
         assertNotEquals(entityManager1, entityManager2);
 
+    }
+
+    /**
+     * Função <b>getTestEntityManager</b>
+     * Deve retornar um Entity Manager que não seja null
+     */
+    @Test
+    void CT039() {
+        EntityManager entityManager = EntityManagerProvider.getTestEntityManager();
+        assertEquals("GerenciadorDeImagensInMemory", entityManager.getEntityManagerFactory().getProperties().get("hibernate.ejb.persistenceUnitName"));
     }
 }

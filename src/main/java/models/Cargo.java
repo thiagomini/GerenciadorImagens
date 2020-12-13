@@ -9,6 +9,8 @@ import java.util.List;
 
 @Entity
 @Table( name = "cargos" )
+@NamedQuery(name = "Cargo.findByCode",
+        query = "SELECT c FROM Cargo c WHERE c.code = :code")
 public class Cargo {
     @Id
     @GeneratedValue

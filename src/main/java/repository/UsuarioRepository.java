@@ -17,10 +17,12 @@ public class UsuarioRepository {
         this.entityManager = entityManager;
     }
 
-    public static synchronized UsuarioRepository getInstance() {
+    public static synchronized UsuarioRepository getInstance(boolean testDatabase) {
         if (uniqueInstance == null) {
             uniqueInstance = new UsuarioRepository(
-                    EntityManagerProvider.getEntityManager()
+                    testDatabase
+                            ? EntityManagerProvider.getTestEntityManager()
+                            : EntityManagerProvider.getEntityManager()
             );
         }
         return uniqueInstance;
@@ -50,6 +52,7 @@ public class UsuarioRepository {
             return Optional.of(usuario);
         } catch (Exception e) {
             e.printStackTrace();
+            entityManager.getTransaction().rollback();
         }
         return Optional.empty();
     }

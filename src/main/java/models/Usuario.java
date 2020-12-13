@@ -28,7 +28,7 @@ public class Usuario {
     @JoinColumn(name="idCargo")
     private Cargo cargo;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PermissaoImagem> permissoesImagens = new ArrayList<>();
 
@@ -61,6 +61,13 @@ public class Usuario {
         this.password = password;
         this.cargo = cargo;
     }
+
+    public Usuario(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
 
     public long getId() {
         return id;

@@ -20,7 +20,7 @@ class UsuarioRepositoryTest {
 
     @BeforeAll
     void setUp() {
-        this.repository = UsuarioRepository.getInstance();
+        this.repository = UsuarioRepository.getInstance(true);
     }
 
     @AfterEach

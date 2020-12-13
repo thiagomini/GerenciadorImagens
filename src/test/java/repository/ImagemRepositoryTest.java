@@ -19,7 +19,7 @@ class ImagemRepositoryTest {
 
     @BeforeAll
     void setUp() {
-        this.repository = ImagemRepository.getInstance();
+        this.repository = ImagemRepository.getInstance(true);
     }
 
     @AfterEach

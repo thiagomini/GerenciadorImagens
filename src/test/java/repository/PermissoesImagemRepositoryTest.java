@@ -22,7 +22,7 @@ class PermissoesImagemRepositoryTest {
 
     @BeforeAll
     void setUp() {
-        this.repository = PermissoesImagemRepository.getInstance();
+        this.repository = PermissoesImagemRepository.getInstance(true);
     }
 
     @AfterEach

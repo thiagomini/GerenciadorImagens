@@ -6,7 +6,7 @@ import presenter.LoginPresenter;
 import repository.UsuarioRepository;
 
 public class TelaInicialBuilder {
-    private static final UsuarioRepository repository = UsuarioRepository.getInstance();
+    private static final UsuarioRepository repository = UsuarioRepository.getInstance(false);
     private TelaInicialBuilder() {
 
     }
