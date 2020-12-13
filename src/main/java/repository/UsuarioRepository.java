@@ -1,5 +1,6 @@
 package repository;
 
+import models.Cargo;
 import models.Usuario;
 
 import javax.persistence.EntityManager;
@@ -40,5 +41,28 @@ public class UsuarioRepository {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    public void delete(Usuario usuario) {
+        try {
+            entityManager.getTransaction().begin();
+            usuario = entityManager.find(Usuario.class, usuario.getId());
+            entityManager.remove(usuario);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+    }
+
+    public void deleteById(long id) {
+        Optional<Usuario> usuario = findById(id);
+        usuario.ifPresent(this::delete);
+    }
+
+    public void deleteAll() {
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("DELETE FROM Usuario").executeUpdate();
+        entityManager.getTransaction().commit();
     }
 }
