@@ -16,10 +16,12 @@ public class PermissoesImagemRepository {
         this.entityManager = entityManager;
     }
 
-    public static synchronized PermissoesImagemRepository getInstance() {
+    public static synchronized PermissoesImagemRepository getInstance(boolean testDatabase) {
         if (uniqueInstance == null) {
             uniqueInstance = new PermissoesImagemRepository(
-                    EntityManagerProvider.getEntityManager()
+                    testDatabase
+                            ? EntityManagerProvider.getTestEntityManager()
+                            : EntityManagerProvider.getEntityManager()
             );
         }
         return uniqueInstance;

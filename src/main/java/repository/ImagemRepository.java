@@ -15,10 +15,12 @@ public class ImagemRepository {
         this.entityManager = entityManager;
     }
 
-    public static synchronized ImagemRepository getInstance() {
+    public static synchronized ImagemRepository getInstance(boolean testDatabase) {
         if (uniqueInstance == null) {
             uniqueInstance = new ImagemRepository(
-                    EntityManagerProvider.getEntityManager()
+                    testDatabase
+                            ? EntityManagerProvider.getTestEntityManager()
+                            : EntityManagerProvider.getEntityManager()
             );
         }
 

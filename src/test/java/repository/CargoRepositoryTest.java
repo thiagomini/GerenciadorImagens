@@ -6,13 +6,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CargoRepositoryTest {
@@ -21,7 +19,7 @@ class CargoRepositoryTest {
 
     @BeforeAll
     void setUp() {
-        this.repository = CargoRepository.getInstance();
+        this.repository = CargoRepository.getInstance(true);
     }
 
     @AfterEach
@@ -105,7 +103,18 @@ class CargoRepositoryTest {
         assertTrue(cargoEncontrado.isEmpty());
     }
 
+    /**
+     * Função <b>findByCode(code)</b>
+     * Deve retornar corretamente um cargo pelo code
+     */
+    @Test
+    void CT034() {
+        Cargo cargo = new Cargo("Administrador", "admin");
+        this.repository.save(cargo);
 
+        Optional<Cargo> cargoEncontrado = this.repository.findByCode("admin");
+        assertTrue(cargoEncontrado.isPresent());
+    }
 
 
 

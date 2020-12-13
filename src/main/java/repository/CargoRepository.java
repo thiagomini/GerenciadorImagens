@@ -5,6 +5,7 @@ import models.Imagem;
 import models.PermissaoImagem;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,14 +19,19 @@ public class CargoRepository {
         this.entityManager = entityManager;
     }
 
-    public static synchronized CargoRepository getInstance() {
+    public static synchronized CargoRepository getInstance(boolean testDatabase) {
         if (uniqueInstance == null) {
             uniqueInstance = new CargoRepository(
-                    EntityManagerProvider.getEntityManager()
+                    testDatabase
+                            ? EntityManagerProvider.getTestEntityManager()
+                            : EntityManagerProvider.getEntityManager()
+
             );
         }
         return uniqueInstance;
     }
+
+
     public Optional<Cargo> findById(long id) {
         Cargo cargo = entityManager.find(Cargo.class, id);
         return cargo != null ? Optional.of(cargo) : Optional.empty();
@@ -33,11 +39,16 @@ public class CargoRepository {
     public List<Cargo> findAll() {
         return entityManager.createQuery("from Cargo").getResultList();
     }
-    public Optional<Cargo> findByName(String name) {
-        Cargo cargo = entityManager.createNamedQuery("Cargo.findByName", Cargo.class)
-                .setParameter("name", name)
-                .getSingleResult();
-        return cargo != null ? Optional.of(cargo) : Optional.empty();
+    public Optional<Cargo> findByCode(String code) {
+        try {
+            Cargo cargo = entityManager.createNamedQuery("Cargo.findByCode", Cargo.class)
+                    .setParameter("code", code)
+                    .getSingleResult();
+            return Optional.of(cargo);
+        } catch (NoResultException exception) {
+            return Optional.empty();
+        }
+
     }
     public Optional<Cargo> save(Cargo cargo) {
         try {
