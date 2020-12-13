@@ -27,6 +27,10 @@ public class Imagem {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PermissaoImagem> permissoesImagens = new ArrayList<>();
 
+    @OneToMany(mappedBy = "imagem", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Notificacao> notificacoes = new ArrayList<>();
+
     public String getCaminho() {
         return caminho;
     }

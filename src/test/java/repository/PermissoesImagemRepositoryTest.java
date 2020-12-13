@@ -132,7 +132,7 @@ class PermissoesImagemRepositoryTest {
                 true
         );
 
-
+        this.repository.save(permissaoImagem);
         this.repository.delete(permissaoImagem);
         assertTrue(this.repository.findById(permissaoImagem.getId()).isEmpty());
     }
@@ -153,7 +153,7 @@ class PermissoesImagemRepositoryTest {
                 true
         );
 
-
+        this.repository.save(permissaoImagem);
         this.repository.deleteById(permissaoImagem.getId());
         assertTrue(this.repository.findById(permissaoImagem.getId()).isEmpty());
     }

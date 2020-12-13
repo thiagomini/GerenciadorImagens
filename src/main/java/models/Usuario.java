@@ -32,6 +32,10 @@ public class Usuario {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PermissaoImagem> permissoesImagens = new ArrayList<>();
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Notificacao> notificacoes = new ArrayList<>();
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -108,6 +112,10 @@ public class Usuario {
 
     public void setPermissoesImagens(List<PermissaoImagem> permissoesImagens) {
         this.permissoesImagens = permissoesImagens;
+    }
+
+    public List<Notificacao> getNotificacoes() {
+        return notificacoes;
     }
 }
 
