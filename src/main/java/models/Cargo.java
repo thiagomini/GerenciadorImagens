@@ -1,5 +1,8 @@
 package models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ public class Cargo {
     private String code;
 
     @OneToMany(mappedBy = "cargo", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Usuario> usuarios = new ArrayList<>();
 
     public Cargo(long id, String nome, String code) {

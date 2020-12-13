@@ -1,0 +1,168 @@
+package repository;
+
+import models.Cargo;
+import models.Imagem;
+import models.PermissaoImagem;
+import models.Usuario;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class PermissoesImagemRepositoryTest {
+
+    EntityManager entityManager;
+    PermissoesImagemRepository repository;
+
+    @BeforeAll
+    void setUp() {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("GerenciadorDeImagensInMemory");
+        this.entityManager = entityManagerFactory.createEntityManager();
+        this.repository = new PermissoesImagemRepository(entityManager);
+    }
+
+    @AfterEach
+    void tearDown() {
+        this.repository.deleteAll();
+        this.entityManager.clear();
+    }
+
+    /**     * Função <b>save()</b>
+     * Deve salvar corretamente uma imagem no banco de dados
+     */
+    @Test
+    void CT007() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Administrador", "admin");
+        Usuario usuario = new Usuario("Thiago", "thiago@email.com", "1234", cargo);
+        PermissaoImagem permissaoImagem = new PermissaoImagem(
+                usuario,
+                imagem,
+                true,
+                true,
+                true
+        );
+
+
+        Optional<PermissaoImagem> permissaoImagemOptional = this.repository.save(permissaoImagem);
+        assertTrue(permissaoImagemOptional.isPresent());
+
+    }
+
+    /**
+     * Função <b>findById()</b>
+     * Deve encontrar corretamente uma imagem no banco de dados pelo id
+     */
+    @Test
+    void CT008() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Administrador", "admin");
+        Usuario usuario = new Usuario("Thiago", "thiago@email.com", "1234", cargo);
+        PermissaoImagem permissaoImagem = new PermissaoImagem(
+                usuario,
+                imagem,
+                true,
+                true,
+                true
+        );
+
+
+        this.repository.save(permissaoImagem);
+
+        Optional<PermissaoImagem> permissaoImagemOptional = this.repository.findById(permissaoImagem.getId());
+        assertTrue(permissaoImagemOptional.isPresent());
+        assertEquals(permissaoImagem.getId(), permissaoImagemOptional.get().getId());
+
+    }
+
+    /**
+     * Função <b>findAll()</b>
+     * Deve encontrar corretamente Todas as imagens do banco
+     */
+    @Test
+    void CT009() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Administrador", "admin");
+        Usuario usuario = new Usuario("Thiago", "thiago@email.com", "1234", cargo);
+        PermissaoImagem permissaoImagem = new PermissaoImagem(
+                usuario,
+                imagem,
+                true,
+                true,
+                true
+        );
+
+        Imagem imagem2 = new Imagem("imagem2.jpg");
+        Cargo cargo2 = new Cargo("Usuario", "user");
+        Usuario usuario2 = new Usuario("Miqueas", "miqueas@email.com", "1234", cargo);
+        PermissaoImagem permissaoImagem2 = new PermissaoImagem(
+                usuario2,
+                imagem2,
+                true,
+                true,
+                true
+        );
+
+
+        this.repository.save(permissaoImagem);
+        this.repository.save(permissaoImagem2);
+
+        ArrayList<PermissaoImagem> listaPermissoes = (ArrayList<PermissaoImagem>) this.repository.findAll();
+        assertEquals(2, listaPermissoes.size());
+
+    }
+
+    /**     * Função <b>delete(permissaoImagem)</b>
+     * Deve deletar corretamente uma imagem pela referência
+     */
+    @Test
+    void CT010() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Administrador", "admin");
+        Usuario usuario = new Usuario("Thiago", "thiago@email.com", "1234", cargo);
+        PermissaoImagem permissaoImagem = new PermissaoImagem(
+                usuario,
+                imagem,
+                true,
+                true,
+                true
+        );
+
+
+        this.repository.delete(permissaoImagem);
+        assertTrue(this.repository.findById(permissaoImagem.getId()).isEmpty());
+    }
+
+    /**     * Função <b>deleteById(id)</b>
+     * Deve deletar corretamente uma imagem pelo Id
+     */
+    @Test
+    void CT011() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Administrador", "admin");
+        Usuario usuario = new Usuario("Thiago", "thiago@email.com", "1234", cargo);
+        PermissaoImagem permissaoImagem = new PermissaoImagem(
+                usuario,
+                imagem,
+                true,
+                true,
+                true
+        );
+
+
+        this.repository.deleteById(permissaoImagem.getId());
+        assertTrue(this.repository.findById(permissaoImagem.getId()).isEmpty());
+    }
+
+
+
+}
