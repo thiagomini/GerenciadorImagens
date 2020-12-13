@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,11 +76,47 @@ public class NotificacaoRepositoryTest {
 
         Imagem imagem2 = new Imagem("imagem2.jpg");
         Cargo cargo2 = new Cargo("Usuario", "user");
-        Usuario usuario2 = new Usuario("Fulano", "beltrano@email.com", "1234", cargo);
-        Notificacao notificacao2 = new Notificacao("A imagem foi compartilhada com você", imagem, usuario);
+        Usuario usuario2 = new Usuario("Fulano", "beltrano@email.com", "1234", cargo2);
+        Notificacao notificacao2 = new Notificacao("A imagem foi compartilhada com você", imagem2, usuario2);
 
         this.repository.save(notificacao);
-        this.repository.save(notificacao);
+        this.repository.save(notificacao2);
+
+        ArrayList<Notificacao> notificacoes = (ArrayList<Notificacao>) this.repository.findAll();
+        assertEquals(2, notificacoes.size());
     }
 
+    /**
+     * Função <b>delete(notificacao)</b>
+     * Deve deletar corretamente uma notificacao pela referência
+     */
+    @Test
+    void CT025() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Fulano", "fulano@email.com", "1234", cargo);
+        Notificacao notificacao = new Notificacao("A imagem foi compartilhada com você", imagem, usuario);
+
+        this.repository.save(notificacao);
+
+        this.repository.delete(notificacao);
+        assertTrue(this.repository.findById(notificacao.getId()).isEmpty());
+    }
+
+    /**
+     * Função <b>deleteById(id)</b>
+     * Deve deletar corretamente uma imagem pelo Id
+     */
+    @Test
+    void CT026() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Fulano", "fulano@email.com", "1234", cargo);
+        Notificacao notificacao = new Notificacao("A imagem foi compartilhada com você", imagem, usuario);
+
+        this.repository.save(notificacao);
+
+        this.repository.deleteById(notificacao.getId());
+        assertTrue(this.repository.findById(notificacao.getId()).isEmpty());
+    }
 }
