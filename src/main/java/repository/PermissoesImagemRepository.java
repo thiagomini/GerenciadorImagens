@@ -1,6 +1,5 @@
 package repository;
 
-import models.Imagem;
 import models.PermissaoImagem;
 
 import javax.persistence.EntityManager;
@@ -24,8 +23,8 @@ public class PermissoesImagemRepository {
         PermissaoImagem permissao = entityManager.find(PermissaoImagem.class, id);
         return permissao != null ? Optional.of(permissao) : Optional.empty();
     }
-    public List<Imagem> findAll() {
-        return entityManager.createQuery("from Imagem").getResultList();
+    public List<PermissaoImagem> findAll() {
+        return entityManager.createQuery("from PermissaoImagem").getResultList();
     }
 
 
