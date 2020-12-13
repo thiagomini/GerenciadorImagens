@@ -4,6 +4,7 @@ import models.Cargo;
 import models.Usuario;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,10 +37,25 @@ public class UsuarioRepository {
     }
 
     public Optional<Usuario> findByName(String name) {
-        Usuario usuario = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.name = :name", Usuario.class)
-                .setParameter("name", name)
-                .getSingleResult();
-        return usuario != null ? Optional.of(usuario) : Optional.empty();
+        try {
+            Usuario usuario = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.name = :name", Usuario.class)
+                    .setParameter("name", name)
+                    .getSingleResult();
+            return Optional.of(usuario);
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<Usuario> findByEmail(String email) {
+        try {
+            Usuario usuario = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+            return Optional.of(usuario);
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
     }
 
     public Optional<Usuario> save(Usuario usuario) {
@@ -79,6 +95,7 @@ public class UsuarioRepository {
 
     /**
      * Indica se existe algum usuário cadastrado no banco
+     *
      * @return Verdadeiro se existe um usuário registrado no banco, falso caso contrário
      */
     public boolean hasOneRegistered() {
