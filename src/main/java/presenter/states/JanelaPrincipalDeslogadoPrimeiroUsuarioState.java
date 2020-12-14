@@ -1,6 +1,5 @@
 package presenter.states;
 
-import presenter.AbstractPresenter;
 import presenter.JanelaPrincipalPresenter;
 
 public class JanelaPrincipalDeslogadoPrimeiroUsuarioState extends JanelaPrincipalDeslogadoState {

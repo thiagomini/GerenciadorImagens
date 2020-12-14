@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class NotificacaoRepositoryTest {
+class NotificacaoRepositoryTest {
 
     NotificacaoRepository repository;
     CargoRepository cargoRepository;

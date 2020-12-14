@@ -27,12 +27,7 @@ public class LoginPresenter extends AbstractPresenter {
     }
 
     private void addLogarListener() {
-        getConvertedView().getBtnLogar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                logar();
-            }
-        });
+        getConvertedView().getBtnLogar().addActionListener(e -> logar());
     }
 
     private void logar() {

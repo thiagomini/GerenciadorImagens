@@ -1,7 +1,6 @@
 package presenter;
 
 import factory.UsuarioFactory;
-import models.Usuario;
 import views.CadastroView;
 
 import javax.swing.*;
@@ -29,12 +28,7 @@ public class CadastroPresenter extends AbstractPresenter{
     }
 
     private void addNovoUsuarioActionListener() {
-        getConvertedView().getBtnCadastrar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cadastrarUsuario();
-            }
-        });
+        getConvertedView().getBtnCadastrar().addActionListener(e -> cadastrarUsuario());
     }
 
     private void cadastrarUsuario() {

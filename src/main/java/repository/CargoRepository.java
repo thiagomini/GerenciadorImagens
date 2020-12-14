@@ -1,8 +1,6 @@
 package repository;
 
 import models.Cargo;
-import models.Imagem;
-import models.PermissaoImagem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

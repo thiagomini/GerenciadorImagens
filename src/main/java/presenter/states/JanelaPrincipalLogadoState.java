@@ -1,8 +1,6 @@
 package presenter.states;
 
-import presenter.AbstractPresenter;
 import presenter.JanelaPrincipalPresenter;
-import views.JanelaPrincipal;
 
 public class JanelaPrincipalLogadoState extends JanelaPrincipalAbstractState{
 

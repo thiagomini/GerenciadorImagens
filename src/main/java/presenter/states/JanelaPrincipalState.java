@@ -1,9 +1,5 @@
 package presenter.states;
 
-import presenter.AbstractPresenter;
-
-import javax.swing.*;
-
 public interface JanelaPrincipalState {
 
     public void exibirLogin();

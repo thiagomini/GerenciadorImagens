@@ -1,6 +1,5 @@
 package repository;
 
-import models.Cargo;
 import models.Usuario;
 
 import javax.persistence.EntityManager;

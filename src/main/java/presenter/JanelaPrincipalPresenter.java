@@ -31,30 +31,15 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
     }
 
     private void addCadastrarActionListener() {
-        getConvertedView().getCadastrarMenuItem().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exibirCadastro();
-            }
-        });
+        getConvertedView().getCadastrarMenuItem().addActionListener(e -> exibirCadastro());
     }
 
     private void addLogarActionListener() {
-        getConvertedView().getLogarMenuItem().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               exibirLogin();
-            }
-        });
+        getConvertedView().getLogarMenuItem().addActionListener(e -> exibirLogin());
     }
 
     private void addDeslogarActionListener() {
-        getConvertedView().getDeslogarMenuItem().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deslogar();
-            }
-        });
+        getConvertedView().getDeslogarMenuItem().addActionListener(e -> deslogar());
     }
 
     public JanelaPrincipal getConvertedView() {

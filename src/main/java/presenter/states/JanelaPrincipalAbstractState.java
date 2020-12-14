@@ -1,6 +1,5 @@
 package presenter.states;
 
-import presenter.AbstractPresenter;
 import presenter.CadastroPresenter;
 import presenter.JanelaPrincipalPresenter;
 import presenter.LoginPresenter;

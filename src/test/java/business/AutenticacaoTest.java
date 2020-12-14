@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class AutenticacaoTest {
+class AutenticacaoTest {
 
     Autenticacao autenticacao;
     UsuarioRepository usuarioRepository;

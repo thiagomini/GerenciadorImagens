@@ -1,8 +1,6 @@
 package presenter.states;
 
-import presenter.AbstractPresenter;
 import presenter.JanelaPrincipalPresenter;
-import presenter.LoginPresenter;
 
 import javax.swing.*;
 
@@ -33,10 +31,5 @@ public class JanelaPrincipalDeslogadoState extends JanelaPrincipalAbstractState{
     @Override
     public void exibirTelaImagens() {
         throw new IllegalStateException("Não é possível exibir as imagens nesse estado!");
-    }
-
-    private void mudarBotaoParaDeslogar() {
-        JMenuItem menuItem = presenter.getConvertedView().getLogarMenuItem();
-        menuItem.setText("deslogar");
     }
 }
