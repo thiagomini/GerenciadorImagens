@@ -155,6 +155,51 @@ class PermissoesImagemRepositoryTest {
         assertTrue(this.repository.findById(permissaoImagem.getId()).isEmpty());
     }
 
+    /**
+     * Função <b>findByUserAndImage(usuario, imagem)</b>
+     * Deve retornar as permissões do usuário para a imagem corretamente
+     */
+    @Test
+    void CT044() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Fulano", "fulano@mail.com", "1234", cargo);
+        PermissaoImagem permissaoImagem = new PermissaoImagem(
+                usuario,
+                imagem,
+                true,
+                false,
+                true
+        );
+        this.repository.save(permissaoImagem);
+        Optional<PermissaoImagem> permissaoImagemOptional = this.repository.findByUserAndImage(usuario, imagem);
+        assertEquals(permissaoImagem, permissaoImagemOptional.get());
+    }
 
+    /**
+     * Função <b>update(permissao)</b>
+     * Deve atualizar as permissões corretamente
+     */
+    @Test
+    void CT045() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Fulano", "fulano@mail.com", "1234", cargo);
+        PermissaoImagem permissaoImagem = new PermissaoImagem(
+                usuario,
+                imagem,
+                false,
+                false,
+                false
+        );
+        this.repository.save(permissaoImagem);
+
+        permissaoImagem.setVisualizacao(true);
+        permissaoImagem.setCompartilhamento(true);
+        permissaoImagem.setExclusao(false);
+
+        Optional<PermissaoImagem> permissaoImagemOptional = this.repository.update(permissaoImagem);
+        assertEquals(permissaoImagem, permissaoImagemOptional.get());
+    }
 
 }

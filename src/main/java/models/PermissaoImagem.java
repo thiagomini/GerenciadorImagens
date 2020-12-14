@@ -24,7 +24,7 @@ public class PermissaoImagem {
     private Imagem imagem;
 
     @Column
-    private boolean escrita;
+    private boolean visualizacao;
 
     @Column
     private boolean exclusao;
@@ -35,19 +35,19 @@ public class PermissaoImagem {
     public PermissaoImagem() {
     }
 
-    public PermissaoImagem(long id, Usuario usuario, Imagem imagem, boolean escrita, boolean exclusao, boolean compartilhamento) {
+    public PermissaoImagem(long id, Usuario usuario, Imagem imagem, boolean visualizacao, boolean exclusao, boolean compartilhamento) {
         this.id = id;
         this.usuario = usuario;
         this.imagem = imagem;
-        this.escrita = escrita;
+        this.visualizacao = visualizacao;
         this.exclusao = exclusao;
         this.compartilhamento = compartilhamento;
     }
 
-    public PermissaoImagem(Usuario usuario, Imagem imagem, boolean escrita, boolean exclusao, boolean compartilhamento) {
+    public PermissaoImagem(Usuario usuario, Imagem imagem, boolean visualizacao, boolean exclusao, boolean compartilhamento) {
         this.usuario = usuario;
         this.imagem = imagem;
-        this.escrita = escrita;
+        this.visualizacao = visualizacao;
         this.exclusao = exclusao;
         this.compartilhamento = compartilhamento;
     }
@@ -76,12 +76,12 @@ public class PermissaoImagem {
         this.imagem = imagem;
     }
 
-    public boolean isEscrita() {
-        return escrita;
+    public boolean isVisualizacao() {
+        return visualizacao;
     }
 
-    public void setEscrita(boolean escrita) {
-        this.escrita = escrita;
+    public void setVisualizacao(boolean visualizacao) {
+        this.visualizacao = visualizacao;
     }
 
     public boolean isExclusao() {
