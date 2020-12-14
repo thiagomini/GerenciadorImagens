@@ -8,6 +8,8 @@
         <!-- Entity classes -->
         <class>models.Cargo</class>
         <class>models.Usuario</class>
+        <class>models.Imagem</class>
+        <class>models.PermissaoImagem</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="javax.persistence.jdbc.url"    value="jdbc:h2:file:./data/gerenciador-imagens"/>
@@ -27,6 +29,8 @@
         <!-- Entity classes -->
         <class>models.Cargo</class>
         <class>models.Usuario</class>
+        <class>models.Imagem</class>
+        <class>models.PermissaoImagem</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="javax.persistence.jdbc.url"    value="jdbc:h2:mem:gerenciador-imagens" />

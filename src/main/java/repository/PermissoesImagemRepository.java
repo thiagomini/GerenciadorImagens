@@ -40,12 +40,12 @@ public class PermissoesImagemRepository {
         return permissao != null ? Optional.of(permissao) : Optional.empty();
     }
 
-    public Optional<PermissaoImagem> findByUserAndImage(Usuario usuario, Imagem imagem) {
+    public Optional<PermissaoImagem> findByUserAndImage(long usuarioId, long imagemId) {
         try {
             PermissaoImagem permissaoImagem = (PermissaoImagem) entityManager.createQuery(
-                    "SELECT pi FROM PermissaoImagem pi WHERE pi.usuario = :usuario AND pi.imagem = :imagem")
-                    .setParameter("usuario", usuario)
-                    .setParameter("imagem", imagem)
+                    "SELECT pi FROM PermissaoImagem pi WHERE pi.usuario.id = :usuarioId AND pi.imagem.id = :imagemId")
+                    .setParameter("usuarioId", usuarioId)
+                    .setParameter("imagemId", imagemId)
                     .getSingleResult();
             return Optional.of(permissaoImagem);
         } catch (NoResultException ex) {

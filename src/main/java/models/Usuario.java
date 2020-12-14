@@ -24,15 +24,15 @@ public class Usuario {
     @Column
     private String password;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = { CascadeType.ALL })
     @JoinColumn(name="idCargo")
     private Cargo cargo;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "usuario", cascade = { CascadeType.ALL })
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PermissaoImagem> permissoesImagens = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = { CascadeType.ALL })
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Notificacao> notificacoes = new ArrayList<>();
 

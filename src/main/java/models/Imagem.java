@@ -23,11 +23,11 @@ public class Imagem {
     @Column
     private boolean excluida;
 
-    @OneToMany(mappedBy = "imagem", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "imagem", cascade = { CascadeType.ALL })
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<PermissaoImagem> permissoesImagens = new ArrayList<>();
 
-    @OneToMany(mappedBy = "imagem", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "imagem", cascade = { CascadeType.ALL })
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Notificacao> notificacoes = new ArrayList<>();
 

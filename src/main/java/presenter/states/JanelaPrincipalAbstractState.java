@@ -44,10 +44,13 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
 
     @Override
     public void update(Observable o, Object arg) {
-        JanelaPrincipalState state =
-        o instanceof LoginPresenter
-                ? new JanelaPrincipalLogadoState(presenter)
-                : new JanelaPrincipalDeslogadoState(presenter);
+        JanelaPrincipalState state;
+        if (o instanceof LoginPresenter) {
+            state = new JanelaPrincipalLogadoState(presenter);
+            presenter.setUsuarioLogado(((LoginPresenter) o).getUsuarioLogado());
+        } else {
+            state = new JanelaPrincipalDeslogadoState(presenter);
+        }
 
         this.presenter.setState(state);
     }

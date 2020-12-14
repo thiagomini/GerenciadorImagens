@@ -20,6 +20,7 @@ class UsuarioFactoryTest {
         this.repository = UsuarioRepository.getInstance(true);
         this.cargoRepository = CargoRepository.getInstance(true);
         this.usuarioFactory = new UsuarioFactory(true);
+        cargoRepository.deleteAll();
     }
 
     @AfterEach
