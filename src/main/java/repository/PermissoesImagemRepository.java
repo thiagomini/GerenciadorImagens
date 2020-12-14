@@ -1,8 +1,11 @@
 package repository;
 
+import models.Imagem;
 import models.PermissaoImagem;
+import models.Usuario;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +39,20 @@ public class PermissoesImagemRepository {
         PermissaoImagem permissao = entityManager.find(PermissaoImagem.class, id);
         return permissao != null ? Optional.of(permissao) : Optional.empty();
     }
+
+    public Optional<PermissaoImagem> findByUserAndImage(Usuario usuario, Imagem imagem) {
+        try {
+            PermissaoImagem permissaoImagem = (PermissaoImagem) entityManager.createQuery(
+                    "SELECT pi FROM PermissaoImagem pi WHERE pi.usuario = :usuario AND pi.imagem = :imagem")
+                    .setParameter("usuario", usuario)
+                    .setParameter("imagem", imagem)
+                    .getSingleResult();
+            return Optional.of(permissaoImagem);
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
+    }
+
     public List<PermissaoImagem> findAll() {
         return entityManager.createQuery("from PermissaoImagem").getResultList();
     }
@@ -45,6 +62,18 @@ public class PermissoesImagemRepository {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(permissao);
+            entityManager.getTransaction().commit();
+            return Optional.of(permissao);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public Optional<PermissaoImagem> update(PermissaoImagem permissao) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(permissao);
             entityManager.getTransaction().commit();
             return Optional.of(permissao);
         } catch (Exception e) {
