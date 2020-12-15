@@ -24,7 +24,7 @@ public class Usuario {
     @Column
     private String password;
 
-    @ManyToOne(cascade = { CascadeType.ALL })
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinColumn(name="idCargo")
     private Cargo cargo;
 
