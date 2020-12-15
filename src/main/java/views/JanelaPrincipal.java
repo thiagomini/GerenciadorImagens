@@ -66,6 +66,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         deslogarMenuItem = new javax.swing.JMenuItem();
         cadastrarMenuItem = new javax.swing.JMenuItem();
         abrirImagensMenuItem = new javax.swing.JMenuItem();
+        manterUsuariosMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
@@ -150,6 +151,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         abrirImagensMenuItem.setMnemonic('a');
         abrirImagensMenuItem.setText("Abrir Imagens");
         fileMenu.add(abrirImagensMenuItem);
+
+        manterUsuariosMenuItem.setText("Manter Usuários");
+        fileMenu.add(manterUsuariosMenuItem);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -261,7 +265,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     public JLabel getNotificacoesLabel() {
         return notificacoesLabel;
     }
-    
+
+    public JMenuItem getManterUsuariosMenuItem() {
+        return manterUsuariosMenuItem;
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -282,6 +289,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem logarMenuItem;
+    private javax.swing.JMenuItem manterUsuariosMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JLabel notificacoesLabel;
     private javax.swing.JMenuItem pasteMenuItem;

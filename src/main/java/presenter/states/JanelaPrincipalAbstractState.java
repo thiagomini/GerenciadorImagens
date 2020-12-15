@@ -1,9 +1,6 @@
 package presenter.states;
 
-import presenter.CadastroPresenter;
-import presenter.ImagensViewPresenter;
-import presenter.JanelaPrincipalPresenter;
-import presenter.LoginPresenter;
+import presenter.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
@@ -58,6 +55,16 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
 
             new ImagensViewPresenter(true, arquivos, presenter.getUsuarioLogado());
 
+        }
+    }
+
+    @Override
+    public void exibirTelaUsuarios() {
+        if (this.presenter.getUsuarioLogado().getCargo().getCode().equals("admin")) {
+            new UsuariosPresenter(true);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Somente o administrador pode ter acesso à tela de usuários");
         }
     }
 
