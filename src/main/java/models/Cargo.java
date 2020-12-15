@@ -74,11 +74,6 @@ public class Cargo {
 
     @Override
     public String toString() {
-        return "Cargo{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", code='" + code + '\'' +
-                ", usuarios=" + usuarios +
-                '}';
+        return this.getNome();
     }
 }

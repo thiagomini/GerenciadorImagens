@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import models.Cargo;
 
 /**
  *
@@ -206,7 +207,7 @@ public class ManterUsuarioView extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> comboBoxCargo;
+    private javax.swing.JComboBox<Cargo> comboBoxCargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -239,7 +240,7 @@ public class ManterUsuarioView extends javax.swing.JFrame {
         return btnSalvar;
     }
 
-    public JComboBox<String> getComboBoxCargo() {
+    public JComboBox<Cargo> getComboBoxCargo() {
         return comboBoxCargo;
     }
 

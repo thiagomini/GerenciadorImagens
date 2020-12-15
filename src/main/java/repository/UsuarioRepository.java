@@ -72,6 +72,19 @@ public class UsuarioRepository {
         return Optional.empty();
     }
 
+    public Optional<Usuario> update(Usuario usuario) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(usuario);
+            entityManager.getTransaction().commit();
+            return Optional.of(usuario);
+        } catch (Exception e) {
+            e.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+        return Optional.empty();
+    }
+
     public void delete(Usuario usuario) {
         try {
             entityManager.getTransaction().begin();

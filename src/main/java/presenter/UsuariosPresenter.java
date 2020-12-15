@@ -89,15 +89,14 @@ public class UsuariosPresenter extends AbstractPresenter {
         String nome = this.getConvertedView().getTxtNome().getText();
         String email = this.getConvertedView().getTxtEmail().getText();
         String senha = this.getConvertedView().getTxtSenha().getPassword().toString();
-        String nomeCargo = (String) this.getConvertedView().getComboBoxCargo().getSelectedItem();
-        Optional<Cargo> cargo = cargoRepository.findByCode(nomeCargo.toLowerCase());
-        Usuario usuario = new Usuario(nome, email, senha, cargo.get());
-        usuarioRepository.save(usuario);
+        Cargo cargo = (Cargo) this.getConvertedView().getComboBoxCargo().getSelectedItem();
+        Usuario usuario = new Usuario(nome, email, senha, cargo);
+        usuarioRepository.update(usuario);
     }
 
     public void listarCargos() {
         ArrayList<Cargo> cargos = (ArrayList<Cargo>) this.cargoRepository.findAll();
-        cargos.forEach(c -> this.getConvertedView().getComboBoxCargo().addItem(c.getNome()));
+        cargos.forEach(c -> this.getConvertedView().getComboBoxCargo().addItem(c));
     }
 
     public ManterUsuarioView getConvertedView() {
