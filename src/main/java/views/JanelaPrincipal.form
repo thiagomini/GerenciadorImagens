@@ -43,6 +43,11 @@
                 <Property name="text" type="java.lang.String" value="Abrir Imagens"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="manterUsuariosMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Manter Usu&#xe1;rios"/>
+              </Properties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
                 <Property name="mnemonic" type="int" value="120"/>

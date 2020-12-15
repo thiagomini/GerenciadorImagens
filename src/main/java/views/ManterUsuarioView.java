@@ -51,7 +51,7 @@ public class ManterUsuarioView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableUsuarios = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manter Usuarios");
 
         jLabel1.setText("Nome:");
@@ -192,6 +192,7 @@ public class ManterUsuarioView extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

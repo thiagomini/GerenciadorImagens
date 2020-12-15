@@ -8,8 +8,12 @@ import repository.CargoRepository;
 import repository.UsuarioRepository;
 import views.ManterUsuarioView;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class UsuariosPresenter extends AbstractPresenter {
 
@@ -17,6 +21,7 @@ public class UsuariosPresenter extends AbstractPresenter {
     private UsuarioRepository usuarioRepository;
     private CargoRepository cargoRepository;
     private DefaultTableModel defaultTableModel;
+    private Usuario usuarioSelecionado;
 
     public UsuariosPresenter(boolean visible) {
         super(visible);
@@ -42,6 +47,9 @@ public class UsuariosPresenter extends AbstractPresenter {
         adicionarBotaoNovoActionListener();
         adicionarBotaoSalvarActionListener();
         adicionarBotaoCancelarActionListener();
+        adicionarBotaoExcluirActionListener();
+        adicionarBotaoEditarActionListener();
+        clicarNaTabelaListSelectionListener();
     }
 
     private void adicionarBotaoNovoActionListener() {
@@ -56,6 +64,38 @@ public class UsuariosPresenter extends AbstractPresenter {
         getConvertedView().getBtnCancelar().addActionListener(e -> executarBotaoCancelar());
     }
 
+    private void adicionarBotaoExcluirActionListener() {
+        getConvertedView().getBtnExcluir().addActionListener(e -> executarBotaoExcluir());
+    }
+
+    private void adicionarBotaoEditarActionListener() {
+        getConvertedView().getBtnEditar().addActionListener(e -> executarBotaoEditar());
+    }
+
+    private void clicarNaTabelaListSelectionListener() {
+        JTable tableUsuarios = getConvertedView().getTableUsuarios();
+        tableUsuarios.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                DefaultTableModel model = (DefaultTableModel) tableUsuarios.getModel();
+                int linhaSelecionada = tableUsuarios.getSelectedRow();
+                if (linhaSelecionada == -1) return;
+                Long idUsuarioSelecionado = (Long) model.getValueAt(linhaSelecionada, 0);
+                Optional<Usuario> usuarioOptional = usuarioRepository.findById(idUsuarioSelecionado);
+                usuarioSelecionado = usuarioOptional.get();
+                clicarNaTabela();
+            }
+        });
+    }
+
+    public void preencherCampos() {
+        getConvertedView().getTxtNome().setText(usuarioSelecionado.getName());
+        getConvertedView().getTxtEmail().setText(usuarioSelecionado.getEmail());
+        getConvertedView().getTxtSenha().setText(usuarioSelecionado.getPassword());
+        // FIXME não está exibindo o cargo corretamente no comboBox para o usuário selecionado
+        getConvertedView().getComboBoxCargo().setSelectedItem(usuarioSelecionado.getCargo());
+    }
+
     private void executarBotaoNovo() {
         this.state.executarBotaoNovo();
     }
@@ -66,6 +106,18 @@ public class UsuariosPresenter extends AbstractPresenter {
 
     private void executarBotaoCancelar() {
         this.state.executarBotaoCancelar();
+    }
+
+    private void executarBotaoExcluir() {
+        this.state.executarBotaoExcluir();
+    }
+
+    private void executarBotaoEditar() {
+        this.state.executarBotaoEditar();
+    }
+
+    private void clicarNaTabela() {
+        this.state.clicarNaTabela();
     }
 
     public void habilitarBotoes(boolean botaoNovo, boolean botaoCancelar, boolean botaoExcluir, boolean botaoEditar, boolean botaoSalvar) {
@@ -97,6 +149,22 @@ public class UsuariosPresenter extends AbstractPresenter {
         Cargo cargo = (Cargo) this.getConvertedView().getComboBoxCargo().getSelectedItem();
         Usuario usuario = new Usuario(nome, email, senha, cargo);
         usuarioRepository.update(usuario);
+    }
+
+    public void editarUsuario() {
+        String nome = this.getConvertedView().getTxtNome().getText();
+        String email = this.getConvertedView().getTxtEmail().getText();
+        String senha = this.getConvertedView().getTxtSenha().getText();
+        Cargo cargo = (Cargo) this.getConvertedView().getComboBoxCargo().getSelectedItem();
+        usuarioSelecionado.setName(nome);
+        usuarioSelecionado.setEmail(email);
+        usuarioSelecionado.setPassword(senha);
+        usuarioSelecionado.setCargo(cargo);
+        usuarioRepository.update(usuarioSelecionado);
+    }
+
+    public void excluirUsuario() {
+        this.usuarioRepository.delete(usuarioSelecionado);
     }
 
     public void listarCargos() {

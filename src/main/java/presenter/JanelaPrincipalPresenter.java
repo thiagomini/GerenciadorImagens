@@ -42,6 +42,7 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         addDeslogarActionListener();
         addExibirTelaImagensListener();
         getConvertedView().getPermissoesMenuItem().addActionListener(e -> this.state.exibirTelaPermissoes());
+        addExibirTelaUsuariosListener();
     }
 
     @Override
@@ -65,6 +66,10 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         getConvertedView().getAbrirImagensMenuItem().addActionListener(e -> exibirTelaImagens());
     }
 
+    private void addExibirTelaUsuariosListener() {
+        getConvertedView().getManterUsuariosMenuItem().addActionListener(e -> exibirTelaUsuarios());
+    }
+
     public JanelaPrincipal getConvertedView() {
         return (JanelaPrincipal) this.tela;
     }
@@ -85,6 +90,10 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
 
     private void exibirTelaImagens() {
         this.state.exibirTelaImagens();
+    }
+
+    private void exibirTelaUsuarios() {
+        this.state.exibirTelaUsuarios();
     }
 
 

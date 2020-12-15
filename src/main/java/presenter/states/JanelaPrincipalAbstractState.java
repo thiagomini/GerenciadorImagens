@@ -68,6 +68,16 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
     }
 
     @Override
+    public void exibirTelaUsuarios() {
+        if (this.presenter.getUsuarioLogado().getCargo().getCode().equals("admin")) {
+            new UsuariosPresenter(true);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Somente o administrador pode ter acesso à tela de usuários");
+        }
+    }
+
+    @Override
     public void update(Observable o, Object arg) {
         JanelaPrincipalState state;
         if (o instanceof LoginPresenter) {
