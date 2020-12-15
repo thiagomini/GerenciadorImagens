@@ -9,32 +9,6 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ImagemProxyTest {
-
-    /**
-     * Função <b>display()</b>
-     * Deve ler uma única vez a imagem do computador
-     */
-    @Test
-    void CT059() throws IOException {
-        ImagemProxy imagemProxy = new ImagemProxy("/imagens/small-placeholder.jpg");
-        Image imagemLida1Vez = imagemProxy.display();
-        Image imagemLida2Vez = imagemProxy.display();
-        assertEquals(imagemLida1Vez, imagemLida2Vez);
-
-    }
-
-    /**
-     * Função <b>redimensionar()</b>
-     * Deve retornar corretamente uma imagem redimensionada
-     */
-    @Test
-    void CT060() throws IOException {
-        ImagemProxy imagemProxy = new ImagemProxy("/imagens/small-placeholder.jpg");
-        BufferedImage imagemRedimensionada = imagemProxy.redimensionar(50);
-        assertEquals(35, imagemRedimensionada.getHeight());
-        assertEquals(50, imagemRedimensionada.getWidth());
-    }
-
     /**
      * Função <b>getNomeArquivo()</b>
      * Deve retornar corretamente o nome do arquivo

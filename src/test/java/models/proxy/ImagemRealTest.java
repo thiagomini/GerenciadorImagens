@@ -25,7 +25,7 @@ class ImagemRealTest {
      */
     @Test
     void CT058() throws IOException {
-        ImagemReal imagemReal = new ImagemReal("/imagens/small-placeholder.jpg");
+        ImagemReal imagemReal = new ImagemReal(getClass().getResource("/imagens/small-placeholder.jpg"));
         BufferedImage imagemRedimensionada = imagemReal.redimensionar(50);
         assertEquals(35, imagemRedimensionada.getHeight());
         assertEquals(50, imagemRedimensionada.getWidth());

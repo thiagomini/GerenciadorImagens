@@ -8,6 +8,7 @@ public class JanelaPrincipalLogadoState extends JanelaPrincipalAbstractState{
         super(presenter);
         presenter.getConvertedView().getAbrirImagensMenuItem().setEnabled(true);
         presenter.getConvertedView().getPermissoesMenuItem().setEnabled(true);
+        presenter.getConvertedView().getManterUsuariosMenuItem().setEnabled(true);
         presenter.getConvertedView().getCadastrarMenuItem().setEnabled(false);
 
         presenter.getConvertedView().getLogarMenuItem().setEnabled(false);
