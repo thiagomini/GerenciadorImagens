@@ -112,7 +112,7 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
         );
 
         presenter.getNotificacaoList().clear();
-        presenter.getConvertedView().getBtnNotificacoes().setText("0");
+        carregarNotificacoes();
     }
 
     @Override
@@ -142,7 +142,7 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
                 String.valueOf(presenter.getNotificacaoList().size())
         );
 
-        if (presenter.getNotificacaoList().isEmpty()) {
+        if (!presenter.getNotificacaoList().isEmpty()) {
             presenter.getConvertedView().getBtnNotificacoes().setCursor(
                     new Cursor(Cursor.HAND_CURSOR)
             );

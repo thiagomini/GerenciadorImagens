@@ -99,7 +99,7 @@ public class ImagemViewAbstractState implements ImagemViewState{
 
         JOptionPane.showMessageDialog(
                 presenter.getTela(),
-                "Notificação criada com sucesso!"
+                "Notificacao criada com sucesso!"
         );
 
     }
