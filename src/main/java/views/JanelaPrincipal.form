@@ -163,7 +163,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="notificacoesLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnNotificacoes" min="-2" pref="44" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -191,7 +191,7 @@
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="btnNotificacoes" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
+                          <Component id="notificacoesLabel" alignment="3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -229,7 +229,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="cargoUsuarioLabel">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="notificacoesLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Notifica&#xe7;&#xf5;es:"/>
           </Properties>

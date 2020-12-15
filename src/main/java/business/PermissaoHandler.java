@@ -3,17 +3,21 @@ package business;
 import models.Imagem;
 import models.PermissaoImagem;
 import models.Usuario;
+import repository.ImagemRepository;
 import repository.PermissoesImagemRepository;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PermissaoHandler {
 
     private final PermissoesImagemRepository permissaoImagemRepository;
+    private final ImagemRepository imagemRepository;
     private final String ADMIN_CODE = "admin";
 
     public PermissaoHandler(boolean testDatabase) {
         this.permissaoImagemRepository = PermissoesImagemRepository.getInstance(testDatabase);
+        imagemRepository = ImagemRepository.getInstance(testDatabase);
     }
 
     public void definirPermissoes(Usuario usuario, Imagem imagem, boolean visualizacao, boolean exclusao, boolean compartilhamento) {
@@ -35,7 +39,11 @@ public class PermissaoHandler {
         if (usuario.getCargo().getCode().equals(ADMIN_CODE)) {
             return true;
         }
-        Optional<PermissaoImagem> permissaoImagemOptional = this.permissaoImagemRepository.findByUserAndImage(usuario.getId(), imagem.getId());
+        Optional<Imagem> imagemAtualizada = imagemRepository.merge(imagem);
+
+        if (imagemAtualizada.isEmpty()) return false;
+
+        Optional<PermissaoImagem> permissaoImagemOptional = this.permissaoImagemRepository.findByUserAndImage(usuario.getId(),  imagemAtualizada.get().getId());
         if (permissaoImagemOptional.isEmpty()) {
             return false;
         }
@@ -46,7 +54,11 @@ public class PermissaoHandler {
         if (usuario.getCargo().getCode().equals(ADMIN_CODE)) {
             return true;
         }
-        Optional<PermissaoImagem> permissaoImagemOptional = this.permissaoImagemRepository.findByUserAndImage(usuario.getId(), imagem.getId());
+        Optional<Imagem> imagemAtualizada = imagemRepository.merge(imagem);
+        if (imagemAtualizada.isEmpty()) return false;
+
+        Optional<PermissaoImagem> permissaoImagemOptional = this.permissaoImagemRepository.findByUserAndImage(usuario.getId(),  imagemAtualizada.get().getId());
+
         if (permissaoImagemOptional.isEmpty()) {
             return false;
         }
@@ -57,10 +69,15 @@ public class PermissaoHandler {
         if (usuario.getCargo().getCode().equals(ADMIN_CODE)) {
             return true;
         }
-        Optional<PermissaoImagem> permissaoImagemOptional = this.permissaoImagemRepository.findByUserAndImage(usuario.getId(), imagem.getId());
+        Optional<Imagem> imagemAtualizada = imagemRepository.merge(imagem);
+
+        if (imagemAtualizada.isEmpty()) return false;
+
+        Optional<PermissaoImagem> permissaoImagemOptional = this.permissaoImagemRepository.findByUserAndImage(usuario.getId(),  imagemAtualizada.get().getId());
         if (permissaoImagemOptional.isEmpty()) {
             return false;
         }
         return permissaoImagemOptional.get().isExclusao();
     }
+
 }

@@ -202,4 +202,14 @@ class PermissoesImagemRepositoryTest {
         assertEquals(permissaoImagem, permissaoImagemOptional.get());
     }
 
+    /**
+     * Função <b>findByUserAndImage(usuario, imagem)</b>
+     * Deve retornar as permissões do usuário para a imagem corretamente
+     */
+    @Test
+    void CT063() {
+        Optional<PermissaoImagem> permissaoImagemOptional = this.repository.findByUserAndImage(99, 99);
+        assertTrue(permissaoImagemOptional.isEmpty());
+    }
+
 }

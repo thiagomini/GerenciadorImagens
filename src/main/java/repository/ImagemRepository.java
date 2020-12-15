@@ -3,6 +3,7 @@ package repository;
 import models.Imagem;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,10 +42,16 @@ public class ImagemRepository {
     }
 
     public Optional<Imagem> findByCaminho(String caminho) {
-        Imagem imagem = entityManager.createNamedQuery("Imagem.findByCaminho", Imagem.class)
-                .setParameter("caminho", caminho)
-                .getSingleResult();
-        return imagem != null ? Optional.of(imagem) : Optional.empty();
+        try {
+            Imagem imagem = entityManager.createNamedQuery("Imagem.findByCaminho", Imagem.class)
+                    .setParameter("caminho", caminho)
+                    .getSingleResult();
+            return Optional.of(imagem);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+
+
     }
     public Optional<Imagem> save(Imagem imagem) {
         try {
@@ -52,6 +59,19 @@ public class ImagemRepository {
             entityManager.persist(imagem);
             entityManager.getTransaction().commit();
             return Optional.of(imagem);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Imagem> merge(Imagem imagem) {
+        Imagem imagemAtualizada;
+        try {
+            entityManager.getTransaction().begin();
+            imagemAtualizada = entityManager.merge(imagem);
+            entityManager.getTransaction().commit();
+            return Optional.of(imagemAtualizada);
         } catch (Exception e) {
             e.printStackTrace();
         }

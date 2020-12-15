@@ -1,5 +1,6 @@
 package models;
 
+import models.proxy.ImagemProxy;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class Imagem {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
 
     @Column
@@ -30,6 +31,9 @@ public class Imagem {
     @OneToMany(mappedBy = "imagem", cascade = { CascadeType.ALL })
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Notificacao> notificacoes = new ArrayList<>();
+
+    @Transient
+    private ImagemProxy imagemProxy;
 
     public String getCaminho() {
         return caminho;
@@ -73,6 +77,14 @@ public class Imagem {
 
     public Imagem() {
 
+    }
+
+    public ImagemProxy getImagemProxy() {
+        return imagemProxy;
+    }
+
+    public void setImagemProxy(ImagemProxy imagemProxy) {
+        this.imagemProxy = imagemProxy;
     }
 
     @Override

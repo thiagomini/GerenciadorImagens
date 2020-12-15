@@ -47,4 +47,8 @@ public class ImagemProxy implements ImagemInterface {
                 caminho.lastIndexOf(File.separator) + 1
         );
     }
+
+    public String getCaminho() {
+        return caminho;
+    }
 }

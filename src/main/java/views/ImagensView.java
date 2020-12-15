@@ -6,7 +6,9 @@
 package views;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import models.proxy.ImagemProxy;
 
 /**
  *
@@ -25,9 +27,7 @@ public class ImagensView extends javax.swing.JFrame {
         return btnCompartilhar;
     }
 
-    public JButton getBtnDesfazer() {
-        return btnDesfazer;
-    }
+
 
     public JButton getBtnExcluir() {
         return btnExcluir;
@@ -37,13 +37,19 @@ public class ImagensView extends javax.swing.JFrame {
         return btnFechar;
     }
 
-    public JList<String> getListaImagens() {
+    public JList<ImagemProxy> getListaImagens() {
         return listaImagens;
     }
 
     public JButton getBtnSolicitarPermissao() {
         return btnSolicitarPermissao;
     }
+
+    public JLabel getImagemLabel() {
+        return imagemLabel;
+    }
+    
+    
     
     
 
@@ -61,7 +67,6 @@ public class ImagensView extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnCompartilhar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        btnDesfazer = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaImagens = new javax.swing.JList<>();
         btnSolicitarPermissao = new javax.swing.JButton();
@@ -74,11 +79,15 @@ public class ImagensView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(imagemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(imagemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         btnExcluir.setText("Excluir");
@@ -92,12 +101,9 @@ public class ImagensView extends javax.swing.JFrame {
         btnFechar.setText("Fechar");
         btnFechar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        btnDesfazer.setText("Desfazer");
-        btnDesfazer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDesfazer.setEnabled(false);
-
         listaImagens.setBorder(javax.swing.BorderFactory.createTitledBorder("Imagens na Pasta"));
         listaImagens.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaImagens.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane2.setViewportView(listaImagens);
 
         btnSolicitarPermissao.setText("Solicitar Permissão");
@@ -109,36 +115,35 @@ public class ImagensView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDesfazer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSolicitarPermissao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCompartilhar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSolicitarPermissao)
+                        .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnFechar)))
+                        .addComponent(btnFechar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnFechar)
-                            .addComponent(btnCompartilhar)
                             .addComponent(btnExcluir)
-                            .addComponent(btnDesfazer)
+                            .addComponent(btnCompartilhar)
                             .addComponent(btnSolicitarPermissao)))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -148,13 +153,12 @@ public class ImagensView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompartilhar;
-    private javax.swing.JButton btnDesfazer;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnSolicitarPermissao;
     private javax.swing.JLabel imagemLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> listaImagens;
+    private javax.swing.JList<ImagemProxy> listaImagens;
     // End of variables declaration//GEN-END:variables
 }

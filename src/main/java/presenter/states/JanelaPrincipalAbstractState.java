@@ -6,10 +6,8 @@ import presenter.JanelaPrincipalPresenter;
 import presenter.LoginPresenter;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
-import java.io.FileFilter;
 import java.util.*;
 
 public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Observer {
@@ -58,7 +56,7 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
                                     || name.toLowerCase().endsWith(".png")))
             ));
 
-            new ImagensViewPresenter(true, arquivos);
+            new ImagensViewPresenter(true, arquivos, presenter.getUsuarioLogado());
 
         }
     }

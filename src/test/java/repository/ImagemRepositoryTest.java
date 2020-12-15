@@ -6,8 +6,7 @@ import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ImagemRepositoryTest {
@@ -140,6 +139,18 @@ class ImagemRepositoryTest {
         assertTrue(imagemRecuperada.isPresent());
         assertEquals(imagemSalva.getId(), imagemRecuperada.get().getId());
 
+    }
+
+    /**
+     * Função <b>merge(imagem)</b>
+     * Deve criar uma nova imagem quando não existe no BD
+     */
+    @Test
+    void CT062() {
+        Imagem imagem = new Imagem("pasta/caminho.jpg");
+        Optional<Imagem> imagemAtualizada = this.repository.merge(imagem);
+        assertTrue(imagemAtualizada.isPresent());
+        assertTrue(imagemAtualizada.get().getId() > 0);
     }
 
 }

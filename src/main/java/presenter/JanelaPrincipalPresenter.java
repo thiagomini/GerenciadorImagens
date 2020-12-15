@@ -33,13 +33,6 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         this.state = TelaInicialBuilder.getEstadoInicial(this);
         tela.setVisible(true);
         this.atualizarRodape(false);
-        try {
-            ImageIcon imageIcon = new ImageIcon(ImageIO.read(getClass().getResource("/imagens/small-placeholder.jpg")));
-            this.getConvertedView().getBtnNotificacoes().setIcon(imageIcon);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Override
@@ -97,6 +90,8 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         if (logado) {
             this.getConvertedView().getUsuarioLogadoTitle().setText("Usuario Logado: ");
             this.getConvertedView().getCargoUsuarioTitle().setText("Cargo do Usuario: ");
+            this.getConvertedView().getNotificacoesLabel().setText("Notificacoes: ");
+            this.getConvertedView().getBtnNotificacoes().setVisible(true);
 
             this.getConvertedView().getUsuarioLogadoLabel().setText(usuarioLogado.getName());
             this.getConvertedView().getCargoUsuarioLabel().setText(usuarioLogado.getCargo().getNome());
@@ -106,6 +101,8 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
 
             this.getConvertedView().getUsuarioLogadoTitle().setText("");
             this.getConvertedView().getCargoUsuarioTitle().setText("");
+            this.getConvertedView().getNotificacoesLabel().setText("");
+            this.getConvertedView().getBtnNotificacoes().setVisible(true);
         }
 
     }

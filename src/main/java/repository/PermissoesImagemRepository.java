@@ -42,13 +42,13 @@ public class PermissoesImagemRepository {
 
     public Optional<PermissaoImagem> findByUserAndImage(long usuarioId, long imagemId) {
         try {
-            PermissaoImagem permissaoImagem = (PermissaoImagem) entityManager.createQuery(
-                    "SELECT pi FROM PermissaoImagem pi WHERE pi.usuario.id = :usuarioId AND pi.imagem.id = :imagemId")
+            PermissaoImagem permissaoImagem = entityManager.createNamedQuery("PermissaoImagem.findByUsuarioEImagem", PermissaoImagem.class)
                     .setParameter("usuarioId", usuarioId)
                     .setParameter("imagemId", imagemId)
                     .getSingleResult();
             return Optional.of(permissaoImagem);
         } catch (NoResultException ex) {
+            ex.printStackTrace();
             return Optional.empty();
         }
     }

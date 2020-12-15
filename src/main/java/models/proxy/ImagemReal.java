@@ -1,5 +1,7 @@
 package models.proxy;
 
+import image_tools.ImageToolkit;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -42,22 +44,6 @@ public class ImagemReal implements ImagemInterface {
     }
 
     private BufferedImage resize(int targetSize) {
-        if (targetSize <= 0) {
-            return imagemLida; //this can't be resized
-        }
-        int targetWidth = targetSize;
-        int targetHeight = targetSize;
-        float ratio = ((float) imagemLida.getHeight() / (float) imagemLida.getWidth());
-        if (ratio <= 1) { //square or landscape-oriented image
-            targetHeight = (int) Math.ceil((float) targetWidth * ratio);
-        } else { //portrait image
-            targetWidth = Math.round((float) targetHeight / ratio);
-        }
-        BufferedImage bi = new BufferedImage(targetWidth, targetHeight, imagemLida.getTransparency() == Transparency.OPAQUE ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = bi.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR); //produces a balanced resizing (fast and decent quality)
-        g2d.drawImage(imagemLida, 0, 0, targetWidth, targetHeight, null);
-        g2d.dispose();
-        return bi;
+        return ImageToolkit.resizeImage(this.imagemLida, targetSize);
     }
 }

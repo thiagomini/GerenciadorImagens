@@ -1,10 +1,12 @@
 package presenter.states.imagens;
 
-public class ImagemViewInitialState implements ImagemViewState{
-    @Override
-    public void selecionarItemLista() {
+import presenter.ImagensViewPresenter;
 
+public class ImagemViewInitialState extends ImagemViewAbstractState{
+    public ImagemViewInitialState(ImagensViewPresenter presenter) {
+        super(presenter);
     }
+
 
     @Override
     public void excluir() {

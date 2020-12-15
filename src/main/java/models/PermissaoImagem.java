@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "permissoes_imagens")
+@NamedQuery(name = "PermissaoImagem.findByUsuarioEImagem",
+        query = "SELECT pi FROM PermissaoImagem pi JOIN pi.usuario u JOIN pi.imagem i WHERE u.id=:usuarioId AND i.id= :imagemId")
 public class PermissaoImagem {
 
     @Id
@@ -16,9 +18,11 @@ public class PermissaoImagem {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.ALL
     })
+    @JoinColumn(name = "USUARIO_ID")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario usuario;
 
+    @JoinColumn(name = "IMAGEM_ID")
     @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     private Imagem imagem;
 

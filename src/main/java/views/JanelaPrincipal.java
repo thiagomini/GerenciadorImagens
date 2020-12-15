@@ -59,7 +59,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         btnNotificacoes = new javax.swing.JButton();
         usuarioLogadoLabel = new javax.swing.JLabel();
         cargoUsuarioLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        notificacoesLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         logarMenuItem = new javax.swing.JMenuItem();
@@ -88,7 +88,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         btnNotificacoes.setText("!");
         btnNotificacoes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 51, 0)));
 
-        jLabel1.setText("Notificações:");
+        notificacoesLabel.setText("Notificações:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,7 +107,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                         .addComponent(cargoUsuarioLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                         .addGap(2, 2, 2)))
                 .addGap(45, 45, 45)
-                .addComponent(jLabel1)
+                .addComponent(notificacoesLabel)
                 .addGap(18, 18, 18)
                 .addComponent(btnNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -129,7 +129,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                                 .addGap(0, 3, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(notificacoesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -258,6 +258,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         return btnNotificacoes;
     }
 
+    public JLabel getNotificacoesLabel() {
+        return notificacoesLabel;
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem abrirImagensMenuItem;
@@ -274,10 +280,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem logarMenuItem;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JLabel notificacoesLabel;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JLabel usuarioLogadoLabel;
     private javax.swing.JLabel usuarioLogadoTitle;
