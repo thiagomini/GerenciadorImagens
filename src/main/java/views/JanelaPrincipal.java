@@ -5,7 +5,7 @@
  */
 package views;
 
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 
 /**
@@ -53,6 +53,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        usuarioLogadoTitle = new javax.swing.JLabel();
+        cargoUsuarioTitle = new javax.swing.JLabel();
+        btnNotificacoes = new javax.swing.JButton();
+        usuarioLogadoLabel = new javax.swing.JLabel();
+        cargoUsuarioLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         logarMenuItem = new javax.swing.JMenuItem();
@@ -70,6 +77,61 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        usuarioLogadoTitle.setText("Usuário Logado:");
+
+        cargoUsuarioTitle.setText("Tipo de Usuário:");
+
+        btnNotificacoes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnNotificacoes.setText("!");
+        btnNotificacoes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 51, 0)));
+
+        jLabel1.setText("Notificações:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(usuarioLogadoTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(usuarioLogadoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cargoUsuarioTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cargoUsuarioLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                        .addGap(2, 2, 2)))
+                .addGap(45, 45, 45)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(btnNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usuarioLogadoTitle)
+                            .addComponent(usuarioLogadoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cargoUsuarioLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cargoUsuarioTitle)
+                                .addGap(0, 3, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu");
@@ -140,11 +202,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 207, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -173,14 +237,34 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     public JMenuItem getDeslogarMenuItem() {
         return deslogarMenuItem;
     }
-    
-    
-    
+
+    public JLabel getCargoUsuarioLabel() {
+        return cargoUsuarioLabel;
+    }
+
+    public JLabel getUsuarioLogadoLabel() {
+        return usuarioLogadoLabel;
+    }
+
+    public JLabel getCargoUsuarioTitle() {
+        return cargoUsuarioTitle;
+    }
+
+    public JLabel getUsuarioLogadoTitle() {
+        return usuarioLogadoTitle;
+    }
+
+    public JButton getBtnNotificacoes() {
+        return btnNotificacoes;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem abrirImagensMenuItem;
+    private javax.swing.JButton btnNotificacoes;
     private javax.swing.JMenuItem cadastrarMenuItem;
+    private javax.swing.JLabel cargoUsuarioLabel;
+    private javax.swing.JLabel cargoUsuarioTitle;
     private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
@@ -190,9 +274,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem logarMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JLabel usuarioLogadoLabel;
+    private javax.swing.JLabel usuarioLogadoTitle;
     // End of variables declaration//GEN-END:variables
 
 }

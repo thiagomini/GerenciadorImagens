@@ -1,11 +1,16 @@
 package presenter.states;
 
 import presenter.CadastroPresenter;
+import presenter.ImagensViewPresenter;
 import presenter.JanelaPrincipalPresenter;
 import presenter.LoginPresenter;
 
-import java.util.Observable;
-import java.util.Observer;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.*;
 
 public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Observer {
 
@@ -34,20 +39,39 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
 
     @Override
     public void deslogar() {
-
+        presenter.setState(new JanelaPrincipalDeslogadoState(presenter));
     }
 
     @Override
     public void exibirTelaImagens() {
+        JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView());
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        j.setAcceptAllFileFilterUsed(false);
+        j.setCurrentDirectory(new java.io.File("."));
+        int resultado = j.showOpenDialog(presenter.getTela());
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            File pasta = j.getSelectedFile();
+            List<File> arquivos = new ArrayList<>(Arrays.asList(
+                    Objects.requireNonNull(pasta.listFiles((dir, name) ->
+                            name.toLowerCase().endsWith(".jpg")
+                                    || name.toLowerCase().endsWith(".jpeg")
+                                    || name.toLowerCase().endsWith(".png")))
+            ));
 
+            new ImagensViewPresenter(true, arquivos);
+
+        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        JanelaPrincipalState state =
-        o instanceof LoginPresenter
-                ? new JanelaPrincipalLogadoState(presenter)
-                : new JanelaPrincipalDeslogadoState(presenter);
+        JanelaPrincipalState state;
+        if (o instanceof LoginPresenter) {
+            state = new JanelaPrincipalLogadoState(presenter);
+            presenter.setUsuarioLogado(((LoginPresenter) o).getUsuarioLogado());
+        } else {
+            state = new JanelaPrincipalDeslogadoState(presenter);
+        }
 
         this.presenter.setState(state);
     }
