@@ -15,6 +15,7 @@ public class JanelaPrincipalDeslogadoState extends JanelaPrincipalAbstractState{
         presenter.getConvertedView().getCadastrarMenuItem().setEnabled(true);
 
         presenter.getConvertedView().getDeslogarMenuItem().setEnabled(false);
+        presenter.getConvertedView().getManterUsuariosMenuItem().setEnabled(false);
         presenter.getConvertedView().getDeslogarMenuItem().setVisible(false);
         presenter.getConvertedView().getPermissoesMenuItem().setEnabled(false);
     }
