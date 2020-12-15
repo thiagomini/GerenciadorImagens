@@ -25,9 +25,9 @@ import java.util.stream.Collectors;
 
 public class ImagensViewPresenter extends AbstractPresenter{
 
-    private final UsuarioRepository usuarioRepository = UsuarioRepository.getInstance(false);
-    private final ImagemRepository imagemRepository = ImagemRepository.getInstance(false);
-    private final PermissoesImagemRepository permissoesImagemRepository = PermissoesImagemRepository.getInstance(false);
+    private UsuarioRepository usuarioRepository;
+    private ImagemRepository imagemRepository;
+    private PermissoesImagemRepository permissoesImagemRepository;
     private List<ImagemProxy> imagensNaPasta;
     private DefaultListModel listModel;
     private ImagemProxy imagemSelecionada;
@@ -66,6 +66,13 @@ public class ImagensViewPresenter extends AbstractPresenter{
     @Override
     protected void adicionarListeners() {
         addCliqueListaListener();
+    }
+
+    @Override
+    protected void iniciarRepositories() {
+        usuarioRepository = UsuarioRepository.getInstance(false);
+        imagemRepository = ImagemRepository.getInstance(false);
+        permissoesImagemRepository = PermissoesImagemRepository.getInstance(false);
     }
 
     private void addCliqueListaListener() {
