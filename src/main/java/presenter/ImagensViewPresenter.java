@@ -66,6 +66,7 @@ public class ImagensViewPresenter extends AbstractPresenter{
     @Override
     protected void adicionarListeners() {
         addCliqueListaListener();
+        getConvertedView().getBtnFechar().addActionListener(e -> tela.dispose());
     }
 
     @Override

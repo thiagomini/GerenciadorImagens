@@ -53,6 +53,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         usuarioLogadoTitle = new javax.swing.JLabel();
         cargoUsuarioTitle = new javax.swing.JLabel();
@@ -65,16 +66,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         logarMenuItem = new javax.swing.JMenuItem();
         deslogarMenuItem = new javax.swing.JMenuItem();
         cadastrarMenuItem = new javax.swing.JMenuItem();
+        permissoesMenuItem = new javax.swing.JMenuItem();
         abrirImagensMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,6 +143,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         cadastrarMenuItem.setText("Cadastrar");
         fileMenu.add(cadastrarMenuItem);
 
+        permissoesMenuItem.setText("Permissoes");
+        fileMenu.add(permissoesMenuItem);
+
         abrirImagensMenuItem.setMnemonic('a');
         abrirImagensMenuItem.setText("Abrir Imagens");
         fileMenu.add(abrirImagensMenuItem);
@@ -161,40 +160,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
-
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
-
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
 
         setJMenuBar(menuBar);
 
@@ -261,30 +226,28 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     public JLabel getNotificacoesLabel() {
         return notificacoesLabel;
     }
+
+    public JMenuItem getPermissoesMenuItem() {
+        return permissoesMenuItem;
+    }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem abrirImagensMenuItem;
     private javax.swing.JButton btnNotificacoes;
     private javax.swing.JMenuItem cadastrarMenuItem;
     private javax.swing.JLabel cargoUsuarioLabel;
     private javax.swing.JLabel cargoUsuarioTitle;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JMenuItem deslogarMenuItem;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem logarMenuItem;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JLabel notificacoesLabel;
-    private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JMenuItem permissoesMenuItem;
     private javax.swing.JLabel usuarioLogadoLabel;
     private javax.swing.JLabel usuarioLogadoTitle;
     // End of variables declaration//GEN-END:variables

@@ -21,6 +21,7 @@ public class ImagensView extends javax.swing.JFrame {
      */
     public ImagensView() {
         initComponents();
+        this.setLocationRelativeTo(this.getParent());
     }
 
     public JButton getBtnCompartilhar() {

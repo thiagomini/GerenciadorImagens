@@ -48,7 +48,6 @@ public class PermissoesImagemRepository {
                     .getSingleResult();
             return Optional.of(permissaoImagem);
         } catch (NoResultException ex) {
-            ex.printStackTrace();
             return Optional.empty();
         }
     }

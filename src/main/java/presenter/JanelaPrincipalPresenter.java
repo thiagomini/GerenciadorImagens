@@ -41,6 +41,7 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         addLogarActionListener();
         addDeslogarActionListener();
         addExibirTelaImagensListener();
+        getConvertedView().getPermissoesMenuItem().addActionListener(e -> this.state.exibirTelaPermissoes());
     }
 
     @Override

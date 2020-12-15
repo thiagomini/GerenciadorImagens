@@ -23,6 +23,7 @@ public class PermissoesView extends javax.swing.JFrame {
      */
     public PermissoesView() {
         initComponents();
+        this.setLocationRelativeTo(this.getParent());
     }
 
     public JRadioButton getBtnCompartilhamento() {
@@ -76,7 +77,6 @@ public class PermissoesView extends javax.swing.JFrame {
         caminhoImagemTxtField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnEscolherImagem = new javax.swing.JButton();
-        previewLabel = new javax.swing.JLabel();
         usuariosComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnLeitura = new javax.swing.JRadioButton();
@@ -84,16 +84,18 @@ public class PermissoesView extends javax.swing.JFrame {
         btnCompartilhamento = new javax.swing.JRadioButton();
         btnSalvar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        previewLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Permissoes de Imagens"));
+
+        caminhoImagemTxtField.setEditable(false);
 
         jLabel1.setText("Imagem:");
 
         btnEscolherImagem.setText("Escolher");
-
-        previewLabel.setBorder(javax.swing.BorderFactory.createTitledBorder("Preview"));
 
         jLabel3.setText("Usuario:");
 
@@ -107,6 +109,21 @@ public class PermissoesView extends javax.swing.JFrame {
 
         btnFechar.setText("Fechar");
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Preview")));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(previewLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(previewLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,7 +131,6 @@ public class PermissoesView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(previewLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -134,7 +150,8 @@ public class PermissoesView extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(usuariosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,7 +164,7 @@ public class PermissoesView extends javax.swing.JFrame {
                     .addComponent(btnEscolherImagem)
                     .addComponent(caminhoImagemTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(previewLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
@@ -159,7 +176,7 @@ public class PermissoesView extends javax.swing.JFrame {
                             .addComponent(btnLeitura)
                             .addComponent(btnExclusao)
                             .addComponent(btnCompartilhamento))
-                        .addGap(25, 46, Short.MAX_VALUE))
+                        .addGap(25, 44, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -176,7 +193,9 @@ public class PermissoesView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -194,6 +213,7 @@ public class PermissoesView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel previewLabel;
     private javax.swing.JComboBox<Usuario> usuariosComboBox;
     // End of variables declaration//GEN-END:variables

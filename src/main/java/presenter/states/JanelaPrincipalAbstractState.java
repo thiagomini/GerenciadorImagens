@@ -1,9 +1,6 @@
 package presenter.states;
 
-import presenter.CadastroPresenter;
-import presenter.ImagensViewPresenter;
-import presenter.JanelaPrincipalPresenter;
-import presenter.LoginPresenter;
+import presenter.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
@@ -32,7 +29,16 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
 
     @Override
     public void exibirTelaPermissoes() {
-
+        if (presenter.getUsuarioLogado().getCargo().getCode().equals("admin")) {
+            new PermissoesPresenter(true);
+        } else {
+            JOptionPane.showMessageDialog(
+                    presenter.getTela(),
+                    "Apena admnistradores podem visualizar as permissoes!",
+                    "Permissoes",
+                    JOptionPane.WARNING_MESSAGE
+            );
+        }
     }
 
     @Override

@@ -7,6 +7,7 @@ public class JanelaPrincipalLogadoState extends JanelaPrincipalAbstractState{
     public JanelaPrincipalLogadoState(JanelaPrincipalPresenter presenter) {
         super(presenter);
         presenter.getConvertedView().getAbrirImagensMenuItem().setEnabled(true);
+        presenter.getConvertedView().getPermissoesMenuItem().setEnabled(true);
         presenter.getConvertedView().getCadastrarMenuItem().setEnabled(false);
 
         presenter.getConvertedView().getLogarMenuItem().setEnabled(false);
@@ -16,10 +17,6 @@ public class JanelaPrincipalLogadoState extends JanelaPrincipalAbstractState{
         presenter.getConvertedView().getDeslogarMenuItem().setVisible(true);
     }
 
-    @Override
-    public void exibirTelaPermissoes() {
-        throw new IllegalStateException("Não é possível exibir as permissões nesse estado!");
-    }
 
     @Override
     public void exibirTelaCadastro() {

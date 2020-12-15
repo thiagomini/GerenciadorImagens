@@ -1,6 +1,7 @@
 package presenter;
 
 import models.Imagem;
+import models.PermissaoImagem;
 import models.Usuario;
 import models.proxy.ImagemProxy;
 import repository.ImagemRepository;
@@ -21,8 +22,9 @@ public class PermissoesPresenter extends AbstractPresenter{
     private PermissoesImagemRepository permissoesImagemRepository;
     private ImagemRepository imagemRepository;
     private Imagem imagemSelecionada;
+    private Usuario usuarioSelecionado;
 
-    protected PermissoesPresenter(boolean visible) {
+    public PermissoesPresenter(boolean visible) {
         super(visible);
     }
 
@@ -32,11 +34,17 @@ public class PermissoesPresenter extends AbstractPresenter{
         tela.setVisible(true);
         preencherComboBox();
         carregarPlaceHolder();
+        habilitarPermissoes(false);
+        getConvertedView().getBtnSalvar().setEnabled(false);
     }
 
     @Override
     protected void adicionarListeners() {
         getConvertedView().getBtnEscolherImagem().addActionListener(e -> botaoEscolherImagem());
+        getConvertedView().getUsuariosComboBox().addActionListener(e -> carregaPermissoes());
+        getConvertedView().getBtnFechar().addActionListener(e -> tela.dispose());
+        getConvertedView().getBtnSalvar().addActionListener(e -> salvarPermissoes());
+
     }
 
     @Override
@@ -48,6 +56,13 @@ public class PermissoesPresenter extends AbstractPresenter{
 
     private PermissoesView getConvertedView() {
         return (PermissoesView) tela;
+    }
+
+    private void habilitarPermissoes(boolean habilitado) {
+        getConvertedView().getUsuariosComboBox().setEnabled(habilitado);
+        getConvertedView().getBtnLeitura().setEnabled(habilitado);
+        getConvertedView().getBtnExclusao().setEnabled(habilitado);
+        getConvertedView().getBtnCompartilhamento().setEnabled(habilitado);
     }
 
     private void preencherComboBox() {
@@ -75,11 +90,26 @@ public class PermissoesPresenter extends AbstractPresenter{
             String caminho = j.getSelectedFile().getPath();
             try {
                 Optional<Imagem> imagemEncontrada = imagemRepository.findByCaminho(caminho);
-                Imagem imagem = imagemEncontrada.orElse(new Imagem(caminho));
-                imagem.setImagemProxy(new ImagemProxy(caminho));
-                imagemSelecionada = imagem;
 
-                atualizaImagem(imagem.getImagemProxy().redimensionar(getConvertedView().getPreviewLabel().getWidth()));
+                if (imagemEncontrada.isEmpty()) {
+                    imagemEncontrada = imagemRepository.save(new Imagem(caminho));
+                }
+
+                if (imagemEncontrada.isEmpty()) {
+                    JOptionPane.showMessageDialog(
+                            tela,
+                            "Erro ao Carregar a imagem!",
+                            "Carregar Imagem",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    return;
+                }
+
+                imagemSelecionada = imagemEncontrada.get();
+                imagemSelecionada.setImagemProxy(new ImagemProxy(caminho));
+                getConvertedView().getCaminhoImagemTxtField().setText(imagemSelecionada.getImagemProxy().getNomeArquivo());
+                atualizaImagem(imagemSelecionada.getImagemProxy().redimensionar(getConvertedView().getPreviewLabel().getWidth()));
+                habilitarPermissoes(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(tela, ex.getMessage());
             }
@@ -89,5 +119,60 @@ public class PermissoesPresenter extends AbstractPresenter{
 
     private void atualizaImagem(BufferedImage imagem) {
         getConvertedView().getPreviewLabel().setIcon(new ImageIcon(imagem));
+    }
+
+    private void setaBotoesPermissao(boolean btnLeitura, boolean btnExclusao, boolean btnCompartilhamento) {
+        getConvertedView().getBtnLeitura().setSelected(btnLeitura);
+        getConvertedView().getBtnExclusao().setSelected(btnExclusao);
+        getConvertedView().getBtnCompartilhamento().setSelected(btnCompartilhamento);
+    }
+
+    private void carregaPermissoes() {
+        this.usuarioSelecionado = (Usuario) getConvertedView().getUsuariosComboBox().getSelectedItem();
+        assert usuarioSelecionado != null;
+        Optional<PermissaoImagem> permissaoImagem = permissoesImagemRepository.findByUserAndImage(
+                usuarioSelecionado.getId(),
+                imagemSelecionada.getId()
+        );
+
+        permissaoImagem.ifPresent(imagem -> setaBotoesPermissao(
+                imagem.isVisualizacao(),
+                imagem.isExclusao(),
+                imagem.isCompartilhamento()
+        ));
+
+        getConvertedView().getBtnSalvar().setEnabled(true);
+    }
+
+    private void salvarPermissoes() {
+        boolean visualizacao = getConvertedView().getBtnLeitura().isSelected();
+        boolean exclusao = getConvertedView().getBtnExclusao().isSelected();
+        boolean compartilhamento = getConvertedView().getBtnCompartilhamento().isSelected();
+
+        PermissaoImagem novaPermissao = new PermissaoImagem(
+                usuarioSelecionado,
+                imagemSelecionada,
+                visualizacao,
+                exclusao,
+                compartilhamento
+        );
+
+        permissoesImagemRepository.update(novaPermissao);
+        JOptionPane.showMessageDialog(
+                tela,
+                "Permissoes atualizadas com sucesso!",
+                "Permissoes",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+        resetaTela();
+    }
+
+    private void resetaTela() {
+        setaBotoesPermissao(false, false, false);
+        carregaPermissoes();
+        getConvertedView().getCaminhoImagemTxtField().setText("");
+        usuarioSelecionado = null;
+        imagemSelecionada = null;
+        carregarPlaceHolder();
     }
 }
