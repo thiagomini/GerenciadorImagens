@@ -12,7 +12,7 @@ public class JanelaUsuariosNovoUsuarioState extends JanelaUsuariosAbstractState 
 
     @Override
     public void executarBotaoSalvar() {
-        // TODO salvar os dados do usuário no banco
+        this.usuariosPresenter.salvarUsuario();
         this.usuariosPresenter.setState(new JanelaUsuariosInicialState(this.usuariosPresenter));
     }
 

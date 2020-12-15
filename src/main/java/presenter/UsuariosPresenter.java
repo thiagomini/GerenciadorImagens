@@ -1,15 +1,28 @@
 package presenter;
 
+import models.Cargo;
+import models.Usuario;
 import presenter.states.usuario.JanelaUsuariosInicialState;
 import presenter.states.usuario.JanelaUsuariosState;
+import repository.CargoRepository;
+import repository.UsuarioRepository;
 import views.ManterUsuarioView;
+
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Optional;
 
 public class UsuariosPresenter extends AbstractPresenter {
 
     private JanelaUsuariosState state;
+    private UsuarioRepository usuarioRepository;
+    private CargoRepository cargoRepository;
 
     public UsuariosPresenter(boolean visible) {
         super(visible);
+        this.cargoRepository = CargoRepository.getInstance(false);
+        this.usuarioRepository = UsuarioRepository.getInstance(false);
+        listarCargos();
     }
 
     @Override
@@ -72,12 +85,23 @@ public class UsuariosPresenter extends AbstractPresenter {
         this.getConvertedView().getComboBoxCargo().setSelectedItem("");
     }
 
-    public ManterUsuarioView getConvertedView() {
-        return (ManterUsuarioView) tela;
+    public void salvarUsuario() {
+        String nome = this.getConvertedView().getTxtNome().getText();
+        String email = this.getConvertedView().getTxtEmail().getText();
+        String senha = this.getConvertedView().getTxtSenha().getPassword().toString();
+        String nomeCargo = (String) this.getConvertedView().getComboBoxCargo().getSelectedItem();
+        Optional<Cargo> cargo = cargoRepository.findByCode(nomeCargo.toLowerCase());
+        Usuario usuario = new Usuario(nome, email, senha, cargo.get());
+        usuarioRepository.save(usuario);
     }
 
-    public JanelaUsuariosState getState() {
-        return state;
+    public void listarCargos() {
+        ArrayList<Cargo> cargos = (ArrayList<Cargo>) this.cargoRepository.findAll();
+        cargos.forEach(c -> this.getConvertedView().getComboBoxCargo().addItem(c.getNome()));
+    }
+
+    public ManterUsuarioView getConvertedView() {
+        return (ManterUsuarioView) tela;
     }
 
     public void setState(JanelaUsuariosState state) {
