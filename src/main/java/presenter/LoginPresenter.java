@@ -34,6 +34,11 @@ public class LoginPresenter extends AbstractPresenter {
         addLogarListener();
     }
 
+    @Override
+    protected void iniciarRepositories() {
+
+    }
+
     private void addLogarListener() {
         getConvertedView().getBtnLogar().addActionListener(e -> logar());
     }

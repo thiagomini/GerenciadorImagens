@@ -53,6 +53,11 @@ public class ImagensViewPresenter extends AbstractPresenter{
 
     }
 
+    @Override
+    protected void iniciarRepositories() {
+
+    }
+
     private void recarregarImagens() {
         this.imagensNaPasta.forEach(imagem -> {
             try {

@@ -8,26 +8,31 @@ import repository.CargoRepository;
 import repository.UsuarioRepository;
 import views.ManterUsuarioView;
 
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Optional;
 
 public class UsuariosPresenter extends AbstractPresenter {
 
     private JanelaUsuariosState state;
     private UsuarioRepository usuarioRepository;
     private CargoRepository cargoRepository;
+    private DefaultTableModel defaultTableModel;
 
     public UsuariosPresenter(boolean visible) {
         super(visible);
-        this.cargoRepository = CargoRepository.getInstance(false);
-        this.usuarioRepository = UsuarioRepository.getInstance(false);
-        listarCargos();
+    }
+
+    @Override
+    protected void iniciarRepositories() {
+        cargoRepository = CargoRepository.getInstance(false);
+        usuarioRepository = UsuarioRepository.getInstance(false);
     }
 
     @Override
     protected void iniciarTela(boolean visible) {
         this.tela = new ManterUsuarioView();
+        listarCargos();
+        defaultTableModel = (DefaultTableModel) getConvertedView().getTableUsuarios().getModel();
         this.state = new JanelaUsuariosInicialState(this);
         this.tela.setVisible(true);
     }
@@ -88,7 +93,7 @@ public class UsuariosPresenter extends AbstractPresenter {
     public void salvarUsuario() {
         String nome = this.getConvertedView().getTxtNome().getText();
         String email = this.getConvertedView().getTxtEmail().getText();
-        String senha = this.getConvertedView().getTxtSenha().getPassword().toString();
+        String senha = this.getConvertedView().getTxtSenha().getText();
         Cargo cargo = (Cargo) this.getConvertedView().getComboBoxCargo().getSelectedItem();
         Usuario usuario = new Usuario(nome, email, senha, cargo);
         usuarioRepository.update(usuario);
@@ -97,6 +102,12 @@ public class UsuariosPresenter extends AbstractPresenter {
     public void listarCargos() {
         ArrayList<Cargo> cargos = (ArrayList<Cargo>) this.cargoRepository.findAll();
         cargos.forEach(c -> this.getConvertedView().getComboBoxCargo().addItem(c));
+    }
+
+    public void reloadTabelaUsuarios() {
+        defaultTableModel.setNumRows(0);
+        ArrayList<Usuario> usuarios = (ArrayList<Usuario>) this.usuarioRepository.findAll();
+        usuarios.forEach(u -> defaultTableModel.addRow(new Object[]{u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getCargo()}));
     }
 
     public ManterUsuarioView getConvertedView() {

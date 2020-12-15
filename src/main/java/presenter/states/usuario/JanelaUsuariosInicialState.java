@@ -9,6 +9,7 @@ public class JanelaUsuariosInicialState extends JanelaUsuariosAbstractState {
         this.usuariosPresenter.limparCampos();
         this.usuariosPresenter.habilitarCampos(false);
         this.usuariosPresenter.habilitarBotoes(true, false, false, false, false);
+        this.usuariosPresenter.reloadTabelaUsuarios();
     }
 
     @Override
