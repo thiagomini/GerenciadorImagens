@@ -27,6 +27,11 @@ public class CadastroPresenter extends AbstractPresenter{
         this.addNovoUsuarioActionListener();
     }
 
+    @Override
+    protected void iniciarRepositories() {
+
+    }
+
     private void addNovoUsuarioActionListener() {
         getConvertedView().getBtnCadastrar().addActionListener(e -> cadastrarUsuario());
     }

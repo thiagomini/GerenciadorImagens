@@ -43,6 +43,11 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         addExibirTelaImagensListener();
     }
 
+    @Override
+    protected void iniciarRepositories() {
+
+    }
+
     private void addCadastrarActionListener() {
         getConvertedView().getCadastrarMenuItem().addActionListener(e -> exibirCadastro());
     }

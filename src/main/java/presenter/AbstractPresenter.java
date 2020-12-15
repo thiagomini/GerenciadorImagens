@@ -10,7 +10,10 @@ public abstract class AbstractPresenter extends Observable {
 
     protected abstract void adicionarListeners();
 
+    protected abstract void iniciarRepositories();
+
     protected AbstractPresenter(boolean visible) {
+        iniciarRepositories();
         iniciarTela(visible);
         adicionarListeners();
     }
