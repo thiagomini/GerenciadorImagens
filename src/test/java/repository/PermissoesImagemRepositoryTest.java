@@ -172,7 +172,7 @@ class PermissoesImagemRepositoryTest {
                 true
         );
         this.repository.save(permissaoImagem);
-        Optional<PermissaoImagem> permissaoImagemOptional = this.repository.findByUserAndImage(usuario, imagem);
+        Optional<PermissaoImagem> permissaoImagemOptional = this.repository.findByUserAndImage(usuario.getId(), imagem.getId());
         assertEquals(permissaoImagem, permissaoImagemOptional.get());
     }
 

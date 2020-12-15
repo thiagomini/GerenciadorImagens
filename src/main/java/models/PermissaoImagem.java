@@ -13,14 +13,13 @@ public class PermissaoImagem {
     @GeneratedValue
     private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
+            CascadeType.ALL
+    })
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name="idUsuario")
     private Usuario usuario;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name="idImagem")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     private Imagem imagem;
 
     @Column
