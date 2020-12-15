@@ -16,6 +16,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class PermissoesPresenter extends AbstractPresenter{
     private UsuarioRepository usuarioRepository;
@@ -66,7 +67,10 @@ public class PermissoesPresenter extends AbstractPresenter{
     }
 
     private void preencherComboBox() {
-        List<Usuario> listaUsuarios = usuarioRepository.findAll();
+        List<Usuario> listaUsuarios = usuarioRepository.findAll().stream().filter(
+                usuario -> !usuario.getCargo().getCode().equals("admin")
+        ).collect(Collectors.toList());
+
         JComboBox<Usuario> comboBox = getConvertedView().getUsuariosComboBox();
         listaUsuarios.forEach(comboBox::addItem);
     }
@@ -110,6 +114,7 @@ public class PermissoesPresenter extends AbstractPresenter{
                 getConvertedView().getCaminhoImagemTxtField().setText(imagemSelecionada.getImagemProxy().getNomeArquivo());
                 atualizaImagem(imagemSelecionada.getImagemProxy().redimensionar(getConvertedView().getPreviewLabel().getWidth()));
                 habilitarPermissoes(true);
+                carregaPermissoes();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(tela, ex.getMessage());
             }

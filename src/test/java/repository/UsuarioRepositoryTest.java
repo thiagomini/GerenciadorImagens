@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UsuarioRepositoryTest {
@@ -166,6 +166,27 @@ class UsuarioRepositoryTest {
 
         Optional<Usuario> usuarioEncontrado = this.repository.findByName(usuario.getName());
         assertTrue(usuarioEncontrado.isPresent());
+    }
+
+    /**
+     * Função <b>count()</b>
+     * Deve retornar corretamente o número de usuários cadastrados
+     */
+    @Test
+    void CT64() {
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Thiago", "thiago@mail.com" , "1234", cargo);
+        Usuario usuario2 = new Usuario("Thiago2", "thiago@mail.com" , "1234", cargo);
+        Usuario usuario3 = new Usuario("Thiago3", "thiago@mail.com" , "1234", cargo);
+
+        repository.save(usuario);
+        repository.save(usuario2);
+        repository.save(usuario3);
+
+        List<Usuario> usuarioList = repository.findAll();
+        assertNotNull(usuarioList.get(0).getCargo());
+        assertNotNull(usuarioList.get(1).getCargo());
+        assertNotNull(usuarioList.get(2).getCargo());
     }
 
 }
