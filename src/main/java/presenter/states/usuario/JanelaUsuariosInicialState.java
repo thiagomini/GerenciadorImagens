@@ -16,4 +16,9 @@ public class JanelaUsuariosInicialState extends JanelaUsuariosAbstractState {
     public void executarBotaoNovo() {
         this.usuariosPresenter.setState(new JanelaUsuariosNovoUsuarioState(this.usuariosPresenter));
     }
+
+    @Override
+    public void clicarNaTabela() {
+        this.usuariosPresenter.setState(new JanelaUsuariosSelecionadoState(this.usuariosPresenter));
+    }
 }
