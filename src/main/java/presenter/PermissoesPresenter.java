@@ -36,7 +36,7 @@ public class PermissoesPresenter extends AbstractPresenter{
 
     @Override
     protected void adicionarListeners() {
-
+        getConvertedView().getBtnEscolherImagem().addActionListener(e -> botaoEscolherImagem());
     }
 
     @Override
