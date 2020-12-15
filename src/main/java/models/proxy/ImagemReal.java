@@ -3,6 +3,7 @@ package models.proxy;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -10,11 +11,15 @@ public class ImagemReal implements ImagemInterface {
     private final BufferedImage imagemLida;
 
     public ImagemReal(String fileName) throws IOException {
-        this.imagemLida = ImageIO.read(getClass().getResource(fileName));
+        this.imagemLida = ImageIO.read(new File(fileName));
     }
 
     public ImagemReal(URL resource) throws IOException {
         this.imagemLida = ImageIO.read(resource);
+    }
+
+    public ImagemReal(File imagem) throws IOException {
+        this.imagemLida = ImageIO.read(imagem);
     }
 
     @Override

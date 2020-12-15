@@ -26,13 +26,4 @@ public class JanelaPrincipalLogadoState extends JanelaPrincipalAbstractState{
         throw new IllegalStateException("Não é possível cadastrar enquanto está logado!");
     }
 
-    @Override
-    public void deslogar() {
-        presenter.setState(new JanelaPrincipalDeslogadoState(presenter));
-    }
-
-    @Override
-    public void exibirTelaImagens() {
-        throw new IllegalStateException("Não é possível exibir as imagens nesse estado!");
-    }
 }

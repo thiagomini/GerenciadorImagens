@@ -1,6 +1,7 @@
 package models.proxy;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class ImagemProxy implements ImagemInterface {
@@ -39,5 +40,11 @@ public class ImagemProxy implements ImagemInterface {
            imagemReal = new ImagemReal(this.caminho);
        }
        return imagemReal.display();
+    }
+
+    public String getNomeArquivo() {
+        return caminho.substring(
+                caminho.lastIndexOf(File.separator) + 1
+        );
     }
 }

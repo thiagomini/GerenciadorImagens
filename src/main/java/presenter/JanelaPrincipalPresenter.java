@@ -47,6 +47,7 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         addCadastrarActionListener();
         addLogarActionListener();
         addDeslogarActionListener();
+        addExibirTelaImagensListener();
     }
 
     private void addCadastrarActionListener() {
@@ -59,6 +60,10 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
 
     private void addDeslogarActionListener() {
         getConvertedView().getDeslogarMenuItem().addActionListener(e -> deslogar());
+    }
+
+    private void addExibirTelaImagensListener() {
+        getConvertedView().getAbrirImagensMenuItem().addActionListener(e -> exibirTelaImagens());
     }
 
     public JanelaPrincipal getConvertedView() {
@@ -77,6 +82,10 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         JOptionPane.showMessageDialog(this.tela, "Usuario deslogado com sucesso!", "Login", JOptionPane.INFORMATION_MESSAGE);
         this.state.deslogar();
         this.atualizarRodape(false);
+    }
+
+    private void exibirTelaImagens() {
+        this.state.exibirTelaImagens();
     }
 
 

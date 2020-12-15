@@ -5,6 +5,9 @@
  */
 package views;
 
+import javax.swing.JButton;
+import javax.swing.JList;
+
 /**
  *
  * @author Thiago
@@ -18,6 +21,32 @@ public class ImagensView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JButton getBtnCompartilhar() {
+        return btnCompartilhar;
+    }
+
+    public JButton getBtnDesfazer() {
+        return btnDesfazer;
+    }
+
+    public JButton getBtnExcluir() {
+        return btnExcluir;
+    }
+
+    public JButton getBtnFechar() {
+        return btnFechar;
+    }
+
+    public JList<String> getListaImagens() {
+        return listaImagens;
+    }
+
+    public JButton getBtnSolicitarPermissao() {
+        return btnSolicitarPermissao;
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,15 +58,15 @@ public class ImagensView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         imagemLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnCompartilhar = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
+        btnDesfazer = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton5 = new javax.swing.JButton();
+        listaImagens = new javax.swing.JList<>();
+        btnSolicitarPermissao = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         imagemLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -52,33 +81,28 @@ public class ImagensView extends javax.swing.JFrame {
             .addComponent(imagemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Excluir");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setEnabled(false);
+        btnExcluir.setText("Excluir");
+        btnExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExcluir.setEnabled(false);
 
-        jButton2.setText("Compartilhar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setEnabled(false);
+        btnCompartilhar.setText("Compartilhar");
+        btnCompartilhar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCompartilhar.setEnabled(false);
 
-        jButton3.setText("Fechar");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFechar.setText("Fechar");
+        btnFechar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButton4.setText("Desfazer");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setEnabled(false);
+        btnDesfazer.setText("Desfazer");
+        btnDesfazer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDesfazer.setEnabled(false);
 
-        jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Imagens na Pasta"));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jList1);
+        listaImagens.setBorder(javax.swing.BorderFactory.createTitledBorder("Imagens na Pasta"));
+        listaImagens.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(listaImagens);
 
-        jButton5.setText("Solicitar Permissão");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setEnabled(false);
+        btnSolicitarPermissao.setText("Solicitar Permissão");
+        btnSolicitarPermissao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSolicitarPermissao.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,15 +114,15 @@ public class ImagensView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
+                        .addComponent(btnDesfazer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnCompartilhar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
+                        .addComponent(btnSolicitarPermissao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(btnFechar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,11 +133,11 @@ public class ImagensView extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton2)
-                            .addComponent(jButton1)
-                            .addComponent(jButton4)
-                            .addComponent(jButton5)))
+                            .addComponent(btnFechar)
+                            .addComponent(btnCompartilhar)
+                            .addComponent(btnExcluir)
+                            .addComponent(btnDesfazer)
+                            .addComponent(btnSolicitarPermissao)))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -123,14 +147,14 @@ public class ImagensView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCompartilhar;
+    private javax.swing.JButton btnDesfazer;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnSolicitarPermissao;
     private javax.swing.JLabel imagemLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listaImagens;
     // End of variables declaration//GEN-END:variables
 }

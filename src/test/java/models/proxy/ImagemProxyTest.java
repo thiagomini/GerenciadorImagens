@@ -24,7 +24,7 @@ class ImagemProxyTest {
     }
 
     /**
-     * Função <b>getScaledImage()</b>
+     * Função <b>redimensionar()</b>
      * Deve retornar corretamente uma imagem redimensionada
      */
     @Test
@@ -33,5 +33,15 @@ class ImagemProxyTest {
         BufferedImage imagemRedimensionada = imagemProxy.redimensionar(50);
         assertEquals(35, imagemRedimensionada.getHeight());
         assertEquals(50, imagemRedimensionada.getWidth());
+    }
+
+    /**
+     * Função <b>getNomeArquivo()</b>
+     * Deve retornar corretamente o nome do arquivo
+     */
+    @Test
+    void CT061() {
+        ImagemProxy imagemProxy = new ImagemProxy("\\imagens\\small-placeholder.jpg");
+        assertEquals("small-placeholder.jpg", imagemProxy.getNomeArquivo());
     }
 }

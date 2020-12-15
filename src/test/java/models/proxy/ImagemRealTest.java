@@ -1,7 +1,6 @@
 package models.proxy;
 
 import org.junit.jupiter.api.Test;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -12,7 +11,7 @@ class ImagemRealTest {
 
     /**
      * Função <b>display()</b>
-     * Deve retornar corretamente uma imagem do tipo Image
+     * Deve ler uma imagem do disco
      */
     @Test
     void CT057() throws IOException {
@@ -21,7 +20,7 @@ class ImagemRealTest {
     }
 
     /**
-     * Função <b>display()</b>
+     * Função <b>redimensionar(tamanho)</b>
      * Deve retornar corretamente uma imagem redimensionada de tamanho 280 x 192
      */
     @Test
