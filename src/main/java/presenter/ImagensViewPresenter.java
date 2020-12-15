@@ -8,6 +8,7 @@ import models.proxy.ImagemProxy;
 import presenter.states.imagens.ImagemViewInitialState;
 import presenter.states.imagens.ImagemViewState;
 import repository.ImagemRepository;
+import repository.NotificacaoRepository;
 import repository.PermissoesImagemRepository;
 import repository.UsuarioRepository;
 import views.ImagensView;
@@ -23,17 +24,50 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ImagensViewPresenter extends AbstractPresenter{
+public class ImagensViewPresenter extends AbstractPresenter {
 
     private UsuarioRepository usuarioRepository;
     private ImagemRepository imagemRepository;
     private PermissoesImagemRepository permissoesImagemRepository;
+    private NotificacaoRepository notificacaoRepository;
     private List<ImagemProxy> imagensNaPasta;
     private DefaultListModel listModel;
     private ImagemProxy imagemSelecionada;
     private ImagemViewState state;
     private PermissaoHandler permissaoHandler = new PermissaoHandler(false);
     private Usuario usuarioLogado;
+
+    public void setState(ImagemViewState state) {
+        this.state = state;
+    }
+
+    public ImagemProxy getImagemSelecionada() {
+        return imagemSelecionada;
+    }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public NotificacaoRepository getNotificacaoRepository() {
+        return notificacaoRepository;
+    }
+
+    public UsuarioRepository getUsuarioRepository() {
+        return usuarioRepository;
+    }
+
+    public ImagemRepository getImagemRepository() {
+        return imagemRepository;
+    }
+
+    public PermissoesImagemRepository getPermissoesImagemRepository() {
+        return permissoesImagemRepository;
+    }
+
+    public void setImagemSelecionada(ImagemProxy imagemSelecionada) {
+        this.imagemSelecionada = imagemSelecionada;
+    }
 
     public ImagensViewPresenter(boolean visible, List<File> imagensNaPasta, Usuario usuarioLogado) {
         super(visible);
@@ -67,6 +101,7 @@ public class ImagensViewPresenter extends AbstractPresenter{
     protected void adicionarListeners() {
         addCliqueListaListener();
         getConvertedView().getBtnFechar().addActionListener(e -> tela.dispose());
+        getConvertedView().getBtnSolicitarPermissao().addActionListener(e -> state.solicitarPermissao());
     }
 
     @Override
@@ -74,6 +109,11 @@ public class ImagensViewPresenter extends AbstractPresenter{
         usuarioRepository = UsuarioRepository.getInstance(false);
         imagemRepository = ImagemRepository.getInstance(false);
         permissoesImagemRepository = PermissoesImagemRepository.getInstance(false);
+        notificacaoRepository = NotificacaoRepository.getInstance(false);
+    }
+
+    private void selecionarItemLista() {
+        this.state.selecionarItemLista();
     }
 
     private void addCliqueListaListener() {
@@ -87,24 +127,8 @@ public class ImagensViewPresenter extends AbstractPresenter{
 
     private void recarregarImagens() {
         this.imagensNaPasta.forEach(imagem ->
-            listModel.addElement(imagem)
+                listModel.addElement(imagem)
         );
-    }
-
-    private void selecionarItemLista() {
-        this.state.selecionarItemLista();
-    }
-
-    public UsuarioRepository getUsuarioRepository() {
-        return usuarioRepository;
-    }
-
-    public ImagemRepository getImagemRepository() {
-        return imagemRepository;
-    }
-
-    public PermissoesImagemRepository getPermissoesImagemRepository() {
-        return permissoesImagemRepository;
     }
 
     public boolean temPermissaoParaVisualizar(Imagem imagem) {
@@ -123,4 +147,17 @@ public class ImagensViewPresenter extends AbstractPresenter{
         Image imagemRedimensionada = imagem.getScaledInstance(larguraLabel, alturaLabel, java.awt.Image.SCALE_SMOOTH);
         getConvertedView().getImagemLabel().setIcon(new ImageIcon(imagemRedimensionada));
     }
+
+    public void setBotoes(
+            boolean compartilhar,
+            boolean solicitarPermissoes,
+            boolean excluir,
+            boolean fechar
+    ) {
+        getConvertedView().getBtnCompartilhar().setEnabled(compartilhar);
+        getConvertedView().getBtnSolicitarPermissao().setEnabled(solicitarPermissoes);
+        getConvertedView().getBtnExcluir().setEnabled(excluir);
+        getConvertedView().getBtnFechar().setEnabled(fechar);
+    }
+
 }

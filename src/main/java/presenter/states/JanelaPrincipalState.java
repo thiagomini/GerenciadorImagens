@@ -14,4 +14,6 @@ public interface JanelaPrincipalState {
 
     public void exibirTelaUsuarios();
 
+    public void exibirNotificacoes();
+
 }

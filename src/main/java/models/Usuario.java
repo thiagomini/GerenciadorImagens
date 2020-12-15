@@ -118,5 +118,9 @@ public class Usuario {
     public List<Notificacao> getNotificacoes() {
         return notificacoes;
     }
+
+    public boolean isAdmin() {
+        return this.getCargo().getCode().equals("admin");
+    }
 }
 

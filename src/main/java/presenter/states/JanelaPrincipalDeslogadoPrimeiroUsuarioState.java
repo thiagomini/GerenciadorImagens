@@ -9,6 +9,7 @@ public class JanelaPrincipalDeslogadoPrimeiroUsuarioState extends JanelaPrincipa
         presenter.getConvertedView().getAbrirImagensMenuItem().setEnabled(false);
         presenter.getConvertedView().getLogarMenuItem().setEnabled(false);
         presenter.getConvertedView().getLogarMenuItem().setVisible(true);
+        presenter.getConvertedView().getBtnNotificacoes().setEnabled(false);
 
         presenter.getConvertedView().getCadastrarMenuItem().setEnabled(true);
 
@@ -21,6 +22,11 @@ public class JanelaPrincipalDeslogadoPrimeiroUsuarioState extends JanelaPrincipa
     @Override
     public void exibirLogin() {
         throw new IllegalStateException("Não é possível logar ainda, não existe nenhum cadastro!");
+    }
+
+    @Override
+    public void exibirNotificacoes() {
+        throw new IllegalStateException("Não é possível exibir as notificacoes nesse estado!");
     }
 
 

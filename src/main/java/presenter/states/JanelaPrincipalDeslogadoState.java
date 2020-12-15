@@ -11,6 +11,7 @@ public class JanelaPrincipalDeslogadoState extends JanelaPrincipalAbstractState{
         presenter.getConvertedView().getAbrirImagensMenuItem().setEnabled(false);
         presenter.getConvertedView().getLogarMenuItem().setEnabled(true);
         presenter.getConvertedView().getLogarMenuItem().setVisible(true);
+        presenter.getConvertedView().getBtnNotificacoes().setEnabled(false);
 
         presenter.getConvertedView().getCadastrarMenuItem().setEnabled(true);
 
@@ -33,5 +34,10 @@ public class JanelaPrincipalDeslogadoState extends JanelaPrincipalAbstractState{
     @Override
     public void exibirTelaImagens() {
         throw new IllegalStateException("Não é possível exibir as imagens nesse estado!");
+    }
+
+    @Override
+    public void exibirNotificacoes() {
+        throw new IllegalStateException("Não é possível exibir as notificacoes nesse estado!");
     }
 }

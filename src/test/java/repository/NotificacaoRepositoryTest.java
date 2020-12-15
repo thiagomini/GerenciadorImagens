@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -123,4 +124,21 @@ class NotificacaoRepositoryTest {
         this.repository.deleteById(notificacao.getId());
         assertTrue(this.repository.findById(notificacao.getId()).isEmpty());
     }
+
+    @Test
+    void CT064() {
+        Imagem imagem = new Imagem("imagem.jpg");
+        Cargo cargo = new Cargo("Usuario", "user");
+        Usuario usuario = new Usuario("Fulano", "fulano@email.com", "1234", cargo);
+        Notificacao notificacao = new Notificacao("A imagem foi compartilhada com você", imagem, usuario);
+
+        this.repository.save(notificacao);
+
+        List<Notificacao> notificacaoList = repository.findByUser(
+                usuario.getId()
+        );
+
+        assertEquals(1, notificacaoList.size());
+    }
+
 }

@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 @Entity
 @Table( name="notificacoes" )
+@NamedQuery(name = "Notificacao.findByUser",
+        query = "SELECT n FROM Notificacao n JOIN n.usuario u WHERE u.id=:usuarioId")
 public class Notificacao {
 
     @Id
@@ -70,12 +72,6 @@ public class Notificacao {
 
     @Override
     public String toString() {
-        return "Notificacao{" +
-                "id=" + id +
-                ", descricao='" + descricao + '\'' +
-                ", imagem=" + imagem +
-                ", usuario=" + usuario +
-                ", lida=" + lida +
-                '}';
+            return getDescricao();
     }
 }

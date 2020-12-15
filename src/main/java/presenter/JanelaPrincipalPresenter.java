@@ -1,18 +1,33 @@
 package presenter;
 
 import business.TelaInicialBuilder;
+import models.Notificacao;
 import models.Usuario;
 import presenter.states.JanelaPrincipalState;
+import repository.NotificacaoRepository;
 import views.JanelaPrincipal;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.IOException;
+import java.util.List;
 
 public class JanelaPrincipalPresenter extends AbstractPresenter{
 
     private JanelaPrincipalState state;
     private Usuario usuarioLogado;
+    private NotificacaoRepository notificacaoRepository;
+    private List<Notificacao> notificacaoList;
+
+    public List<Notificacao> getNotificacaoList() {
+        return notificacaoList;
+    }
+
+    public void setNotificacaoList(List<Notificacao> notificacaoList) {
+        this.notificacaoList = notificacaoList;
+    }
+
+    public NotificacaoRepository getNotificacaoRepository() {
+        return notificacaoRepository;
+    }
 
     public JanelaPrincipalPresenter(boolean visible) {
         super(visible);
@@ -43,11 +58,12 @@ public class JanelaPrincipalPresenter extends AbstractPresenter{
         addExibirTelaImagensListener();
         getConvertedView().getPermissoesMenuItem().addActionListener(e -> this.state.exibirTelaPermissoes());
         addExibirTelaUsuariosListener();
+        getConvertedView().getBtnNotificacoes().addActionListener(e -> this.state.exibirNotificacoes());
     }
 
     @Override
     protected void iniciarRepositories() {
-
+        notificacaoRepository = NotificacaoRepository.getInstance(false);
     }
 
     private void addCadastrarActionListener() {

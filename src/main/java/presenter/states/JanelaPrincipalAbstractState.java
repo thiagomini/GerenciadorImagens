@@ -1,11 +1,15 @@
 package presenter.states;
 
+import models.Notificacao;
 import presenter.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
 import java.io.File;
 import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Observer {
 
@@ -44,6 +48,11 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
     @Override
     public void deslogar() {
         presenter.setState(new JanelaPrincipalDeslogadoState(presenter));
+        presenter.getConvertedView().getBtnNotificacoes().setCursor(
+                new Cursor(Cursor.DEFAULT_CURSOR)
+        );
+        presenter.getConvertedView().getBtnNotificacoes().setText("0");
+        presenter.setNotificacaoList(new ArrayList<>());
     }
 
     @Override
@@ -72,9 +81,38 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
         if (this.presenter.getUsuarioLogado().getCargo().getCode().equals("admin")) {
             new UsuariosPresenter(true);
         } else {
-            JOptionPane.showMessageDialog(null,
-                    "Somente o administrador pode ter acesso à tela de usuários");
+            JOptionPane.showMessageDialog(presenter.getTela(),
+                    "Somente o administrador pode ter acesso a tela de usuarios",
+                    "Permissoes",
+                    JOptionPane.WARNING_MESSAGE);
         }
+    }
+
+    @Override
+    public void exibirNotificacoes() {
+
+        String notificacoes = "";
+        List<Notificacao> listaNaoLidos = presenter
+                .getNotificacaoList()
+                .stream()
+                .filter(notificacao -> !notificacao.isLida())
+                .collect(Collectors.toList());
+
+        for (Notificacao n: listaNaoLidos) {
+            notificacoes = notificacoes.concat(n.getDescricao() + "\n");
+            n.setLida(true);
+            presenter.getNotificacaoRepository().merge(n);
+        }
+
+        JOptionPane.showMessageDialog(
+                presenter.getTela(),
+                notificacoes,
+                "Notificacoes",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+
+        presenter.getNotificacaoList().clear();
+        presenter.getConvertedView().getBtnNotificacoes().setText("0");
     }
 
     @Override
@@ -83,10 +121,39 @@ public class JanelaPrincipalAbstractState implements JanelaPrincipalState, Obser
         if (o instanceof LoginPresenter) {
             state = new JanelaPrincipalLogadoState(presenter);
             presenter.setUsuarioLogado(((LoginPresenter) o).getUsuarioLogado());
+            carregarNotificacoes();
         } else {
             state = new JanelaPrincipalDeslogadoState(presenter);
         }
 
         this.presenter.setState(state);
     }
+
+    private void carregarNotificacoes() {
+        presenter.setNotificacaoList(
+                presenter.getNotificacaoRepository().findByUser(
+                        presenter.getUsuarioLogado().getId()
+                )
+                        .stream()
+                        .filter(notificacao -> !notificacao.isLida())
+                        .collect(Collectors.toList())
+        );
+        presenter.getConvertedView().getBtnNotificacoes().setText(
+                String.valueOf(presenter.getNotificacaoList().size())
+        );
+
+        if (presenter.getNotificacaoList().isEmpty()) {
+            presenter.getConvertedView().getBtnNotificacoes().setCursor(
+                    new Cursor(Cursor.HAND_CURSOR)
+            );
+            presenter.getConvertedView().getBtnNotificacoes().setEnabled(true);
+        } else {
+            presenter.getConvertedView().getBtnNotificacoes().setCursor(
+                    new Cursor(Cursor.DEFAULT_CURSOR)
+            );
+            presenter.getConvertedView().getBtnNotificacoes().setEnabled(false);
+        }
+    }
+
+
 }

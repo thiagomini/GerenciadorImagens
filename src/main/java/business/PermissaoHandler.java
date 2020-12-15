@@ -13,7 +13,6 @@ public class PermissaoHandler {
 
     private final PermissoesImagemRepository permissaoImagemRepository;
     private final ImagemRepository imagemRepository;
-    private final String ADMIN_CODE = "admin";
 
     public PermissaoHandler(boolean testDatabase) {
         this.permissaoImagemRepository = PermissoesImagemRepository.getInstance(testDatabase);
@@ -36,7 +35,7 @@ public class PermissaoHandler {
     }
 
     public boolean temPermissaoParaVisualizar(Usuario usuario, Imagem imagem) {
-        if (usuario.getCargo().getCode().equals(ADMIN_CODE)) {
+        if (usuario.isAdmin()) {
             return true;
         }
         Optional<Imagem> imagemAtualizada = imagemRepository.merge(imagem);
@@ -51,7 +50,7 @@ public class PermissaoHandler {
     }
 
     public boolean temPermissaoParaCompartilhar(Usuario usuario, Imagem imagem) {
-        if (usuario.getCargo().getCode().equals(ADMIN_CODE)) {
+        if (usuario.isAdmin()) {
             return true;
         }
         Optional<Imagem> imagemAtualizada = imagemRepository.merge(imagem);
@@ -66,7 +65,7 @@ public class PermissaoHandler {
     }
 
     public boolean temPermissaoParaExcluir(Usuario usuario, Imagem imagem) {
-        if (usuario.getCargo().getCode().equals(ADMIN_CODE)) {
+        if (usuario.isAdmin()) {
             return true;
         }
         Optional<Imagem> imagemAtualizada = imagemRepository.merge(imagem);

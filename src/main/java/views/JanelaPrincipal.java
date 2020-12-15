@@ -81,9 +81,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         cargoUsuarioTitle.setText("Tipo de Usuário:");
 
-        btnNotificacoes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnNotificacoes.setText("!");
-        btnNotificacoes.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 51, 0)));
+        btnNotificacoes.setText("0");
 
         notificacoesLabel.setText("Notificações:");
 
@@ -105,9 +103,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                         .addGap(2, 2, 2)))
                 .addGap(45, 45, 45)
                 .addComponent(notificacoesLabel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNotificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,32 +128,43 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        menuBar.setBackground(new java.awt.Color(204, 204, 204));
+        menuBar.setForeground(new java.awt.Color(0, 51, 51));
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu");
+        fileMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         logarMenuItem.setMnemonic('o');
         logarMenuItem.setText("Logar");
+        logarMenuItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(logarMenuItem);
 
         deslogarMenuItem.setText("Deslogar");
+        deslogarMenuItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(deslogarMenuItem);
 
         cadastrarMenuItem.setMnemonic('s');
         cadastrarMenuItem.setText("Cadastrar");
+        cadastrarMenuItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(cadastrarMenuItem);
 
         permissoesMenuItem.setText("Permissoes");
+        permissoesMenuItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(permissoesMenuItem);
 
         abrirImagensMenuItem.setMnemonic('a');
         abrirImagensMenuItem.setText("Abrir Imagens");
+        abrirImagensMenuItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(abrirImagensMenuItem);
 
         manterUsuariosMenuItem.setText("Manter Usuários");
+        manterUsuariosMenuItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fileMenu.add(manterUsuariosMenuItem);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
+        exitMenuItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
@@ -176,7 +185,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 207, Short.MAX_VALUE)
+                .addContainerGap(207, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

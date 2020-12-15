@@ -1,28 +1,11 @@
 package presenter.states.imagens;
 
-public class ImagemViewSelecionadoState implements ImagemViewState{
-    @Override
-    public void selecionarItemLista() {
+import presenter.ImagensViewPresenter;
 
-    }
+public class ImagemViewSelecionadoState extends ImagemViewAbstractState{
 
-    @Override
-    public void excluir() {
-
-    }
-
-    @Override
-    public void solicitarPermissao() {
-
-    }
-
-    @Override
-    public void compartilhar() {
-
-    }
-
-    @Override
-    public void fechar() {
-
+    public ImagemViewSelecionadoState(ImagensViewPresenter presenter) {
+        super(presenter);
+        presenter.setBotoes(true, true, true, true);
     }
 }

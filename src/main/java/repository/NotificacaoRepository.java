@@ -3,6 +3,7 @@ package repository;
 import models.Notificacao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,12 @@ public class NotificacaoRepository {
         return notificacao != null ? Optional.of(notificacao) : Optional.empty();
     }
 
+    public List<Notificacao> findByUser(long usuarioId) {
+        return entityManager.createNamedQuery("Notificacao.findByUser", Notificacao.class)
+                .setParameter("usuarioId", usuarioId)
+                .getResultList();
+    }
+
     public List<Notificacao> findAll() {
         return entityManager.createQuery("from Notificacao").getResultList();
     }
@@ -40,6 +47,18 @@ public class NotificacaoRepository {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(notificacao);
+            entityManager.getTransaction().commit();
+            return Optional.of(notificacao);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Notificacao> merge(Notificacao notificacao) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(notificacao);
             entityManager.getTransaction().commit();
             return Optional.of(notificacao);
         } catch (Exception e) {
